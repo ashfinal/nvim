@@ -27,4 +27,6 @@ if not present then
   end
 end
 
-return { bootstrap = bootstrap, paq = paq }
+if bootstrap then vim.g.paq_bootstrap = true end
+
+return paq

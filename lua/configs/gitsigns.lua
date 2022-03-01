@@ -1,9 +1,11 @@
-local present = pcall(require, "plenary")
+if vim.g.paq_bootstrap then
+  local present = pcall(require, "plenary")
 
-if not present then
-  vim.notify("Please rerun gitsigns hook or just restart nvim.", vim.log.levels.WARN)
-  package.loaded['configs.gitsigns'] = nil
-  return
+  if not present then
+    vim.notify("Please rerun gitsigns hook or just restart nvim.", vim.log.levels.WARN)
+    package.loaded['configs.gitsigns'] = nil
+    return
+  end
 end
 
 local bmap = require("utils").bmap

@@ -1,11 +1,10 @@
-local present, wrapper = pcall(require, "bootstrap")
+local present, paq = pcall(require, "bootstrap")
 
 if not present then
   return false
 end
 
 local map = require("utils").map
-local bootstrap, paq = wrapper.bootstrap, wrapper.paq
 
 local plugins = {
   { "savq/paq-nvim", opt = true },
@@ -280,4 +279,4 @@ local plugins = {
 
 paq(plugins)
 
-if bootstrap then paq:sync() end
+if vim.g.paq_bootstrap then paq:sync() end

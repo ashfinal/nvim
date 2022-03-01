@@ -1,9 +1,11 @@
-local present = pcall(require, "cmp")
+if vim.g.paq_bootstrap then
+  local present = pcall(require, "cmp")
 
-if not present then
-  vim.notify("Please rerun cmp-buffer hook or just restart nvim.", vim.log.levels.WARN)
-  package.loaded['configs.cmp-buffer'] = nil
-  return
+  if not present then
+    vim.notify("Please rerun cmp-buffer hook or just restart nvim.", vim.log.levels.WARN)
+    package.loaded['configs.cmp-buffer'] = nil
+    return
+  end
 end
 
 if package.loaded['cmp_buffer'] == nil then

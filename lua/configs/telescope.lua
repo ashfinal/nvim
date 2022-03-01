@@ -1,9 +1,11 @@
-local present = pcall(require, "plenary")
+if vim.g.paq_bootstrap then
+  local present = pcall(require, "plenary")
 
-if not present then
-  vim.notify("Please rerun telescope hook or just restart nvim.", vim.log.levels.WARN)
-  package.loaded['configs.telescope'] = nil
-  return
+  if not present then
+    vim.notify("Please rerun telescope hook or just restart nvim.", vim.log.levels.WARN)
+    package.loaded['configs.telescope'] = nil
+    return
+  end
 end
 
 local map = require("utils").map

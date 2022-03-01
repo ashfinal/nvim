@@ -1,9 +1,11 @@
-local present = pcall(require, "lspconfig")
+if vim.g.paq_bootstrap then
+  local present = pcall(require, "lspconfig")
 
-if not present then
-  vim.notify("Please rerun gotopreview hook or just restart nvim.", vim.log.levels.WARN)
-  package.loaded['configs.gotopreview'] = nil
-  return
+  if not present then
+    vim.notify("Please rerun gotopreview hook or just restart nvim.", vim.log.levels.WARN)
+    package.loaded['configs.gotopreview'] = nil
+    return
+  end
 end
 
 local default = {
