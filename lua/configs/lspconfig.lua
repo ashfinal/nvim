@@ -16,6 +16,7 @@ local signature = {
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   bmap(bufnr, 'n', 'ge', '<Cmd>lua vim.diagnostic.open_float()<CR>')
+  bmap(bufnr, 'n', 'gE', '<Cmd>lua vim.diagnostic.open_float({scope = "buffer"})<CR>')
   bmap(bufnr, 'n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>')
   bmap(bufnr, 'n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>')
   bmap(bufnr, 'n', 'gQ', '<Cmd>lua vim.diagnostic.setloclist()<CR>')
@@ -37,9 +38,6 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
   bmap(bufnr, 'n', 'gq', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
 
-  -- vim.cmd([[
-  --   autocmd! CursorHold <buffer> lua vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
-  -- ]])
   require("lsp_signature").on_attach(signature)
   bmap(bufnr, 'n', 'gd', '<Cmd>lua require("goto-preview").goto_preview_definition()<CR>')
   bmap(bufnr, 'n', 'gl', '<Cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
@@ -51,6 +49,9 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
   severity_sort = false,
+  float = {
+    border = "rounded",
+  },
 })
 
 vim.lsp.handlers["textDocument/hover"] =
