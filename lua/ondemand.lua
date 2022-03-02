@@ -70,13 +70,12 @@ if pkgs_exist("lualine.nvim", "opt") then
   ]])
 end
 
-if pkgs_exist({ "telescope.nvim", "plenary.nvim" }, "opt") then
+if pkgs_exist("fzf-lua", "opt") then
   vim.cmd([[
-    augroup plugins_telescope
+    augroup plugins_fzflua
       autocmd!
-      autocmd VimEnter * ++once packadd plenary.nvim
-        \ | packadd telescope.nvim
-        \ | lua require("configs.telescope")
+      autocmd VimEnter * ++once packadd fzf-lua
+        \ | lua require("configs.fzflua")
     augroup END
   ]])
 end

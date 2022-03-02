@@ -53,10 +53,10 @@ local plugins = {
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
+    "ibhagwan/fzf-lua",
     opt = true,
     run = function()
-      require("configs.telescope")
+      require("configs.fzflua")
     end,
   },
   {
