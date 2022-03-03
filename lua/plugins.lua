@@ -109,6 +109,13 @@ local plugins = {
     end,
   },
   {
+    "uga-rosa/cmp-dictionary",
+    opt = true,
+    run = function()
+      require("configs.cmp-dictionary")
+    end,
+  },
+  {
     "saadparwaiz1/cmp_luasnip",
     opt = true,
     run = function()
