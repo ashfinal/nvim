@@ -72,7 +72,6 @@ local default = {
       -- Source
       vim_item.menu = ({
         buffer = "[Buffer]",
-        dictionary = "[Dict]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
@@ -144,7 +143,6 @@ local default = {
         end,
       },
     },
-    { name = 'dictionary' },
     { name = 'cmdline' },
   })
 }

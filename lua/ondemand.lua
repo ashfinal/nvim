@@ -126,7 +126,7 @@ if pkgs_exist({ "LuaSnip", "friendly-snippets" }, "opt") then
   ]])
 end
 
-if pkgs_exist({ "nvim-cmp", "cmp-buffer", "cmp-path", "cmp-cmdline", "cmp-dictionary", "cmp_luasnip" }, "opt") then
+if pkgs_exist({ "nvim-cmp", "cmp-buffer", "cmp-path", "cmp-cmdline", "cmp_luasnip" }, "opt") then
   vim.cmd([[
     augroup plugins_cmp
       autocmd!
@@ -134,11 +134,10 @@ if pkgs_exist({ "nvim-cmp", "cmp-buffer", "cmp-path", "cmp-cmdline", "cmp-dictio
         \ | packadd cmp-buffer
         \ | packadd cmp-path
         \ | packadd cmp-cmdline
-        \ | packadd cmp-dictionary
         \ | packadd cmp_luasnip
         \ | lua require("configs.nvim-cmp") require("configs.cmp-buffer")
         \ require("configs.cmp-path") require("configs.cmp-cmdline")
-        \ require("configs.cmp-dictionary") require("configs.cmp_luasnip")
+        \ require("configs.cmp_luasnip")
     augroup END
   ]])
 end
