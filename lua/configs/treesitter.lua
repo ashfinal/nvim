@@ -32,8 +32,8 @@ local default = {
     enable = true,
     keymaps = {
       init_selection = "<CR>",
-      node_incremental = "+",
-      scope_incremental = "<CR>",
+      node_incremental = "<CR>",
+      scope_incremental = "+",
       node_decremental = "-",
     },
   },
