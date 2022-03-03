@@ -38,9 +38,16 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
   bmap(bufnr, 'n', 'gq', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
 
-  require("lsp_signature").on_attach(signature)
-  bmap(bufnr, 'n', 'gd', '<Cmd>lua require("goto-preview").goto_preview_definition()<CR>')
-  bmap(bufnr, 'n', 'gl', '<Cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
+  local present0 = pcall(require, "lsp_signature")
+  if present0 then
+    require("lsp_signature").on_attach(signature)
+  end
+
+  local present1 = pcall(require, "goto-preview")
+  if present1 then
+    bmap(bufnr, 'n', 'gd', '<Cmd>lua require("goto-preview").goto_preview_definition()<CR>')
+    bmap(bufnr, 'n', 'gl', '<Cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
+  end
 end
 
 vim.diagnostic.config({
@@ -66,7 +73,10 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local present2 = pcall(require, "cmp_nvim_lsp")
+if present2 then
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+end
 
 local default = {
   on_attach = on_attach,
