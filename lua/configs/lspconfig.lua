@@ -37,6 +37,7 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>')
   bmap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
   bmap(bufnr, 'n', 'gq', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
+  bmap(bufnr, 'x', 'gq', '<Cmd>lua vim.lsp.buf.range_formatting()<CR>')
 
   local present0 = pcall(require, "lsp_signature")
   if present0 then
