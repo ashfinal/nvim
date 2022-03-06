@@ -301,7 +301,7 @@ end
 
 if pkgs_exist("vim-textmanip", "opt") then
   vim.cmd([[
-    augroup plugins_align
+    augroup plugins_textmanip
       autocmd!
       autocmd BufReadPost * ++once packadd vim-textmanip
         \ | silent xmap <C-j> <Plug>(textmanip-move-down)
