@@ -293,8 +293,8 @@ if pkgs_exist("vim-easy-align", "opt") then
     augroup plugins_align
       autocmd!
       autocmd BufReadPost * ++once packadd vim-easy-align
-        \ | silent xmap gz <Plug>(EasyAlign)
-        \ | silent nmap gz <Plug>(EasyAlign)
+        \ | xmap gz <Plug>(EasyAlign)
+        \ | nmap gz <Plug>(EasyAlign)
     augroup END
   ]])
 end
@@ -304,10 +304,10 @@ if pkgs_exist("vim-textmanip", "opt") then
     augroup plugins_textmanip
       autocmd!
       autocmd BufReadPost * ++once packadd vim-textmanip
-        \ | silent xmap <C-j> <Plug>(textmanip-move-down)
-        \ | silent xmap <C-k> <Plug>(textmanip-move-up)
-        \ | silent xmap <C-h> <Plug>(textmanip-move-left)
-        \ | silent xmap <C-l> <Plug>(textmanip-move-right)
+        \ | xmap <C-j> <Plug>(textmanip-move-down)
+        \ | xmap <C-k> <Plug>(textmanip-move-up)
+        \ | xmap <C-h> <Plug>(textmanip-move-left)
+        \ | xmap <C-l> <Plug>(textmanip-move-right)
     augroup END
   ]])
 end

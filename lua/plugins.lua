@@ -261,18 +261,18 @@ local plugins = {
     "junegunn/vim-easy-align",
     opt = true,
     run = function()
-      map("x", "gz", "<Plug>(EasyAlign)", { noremap = false })
-      map("n", "gz", "<Plug>(EasyAlign)", { noremap = false })
+      map("x", "gz", "<Plug>(EasyAlign)", { noremap = false, silent = false })
+      map("n", "gz", "<Plug>(EasyAlign)", { noremap = false, silent = false })
     end,
   },
   {
     "t9md/vim-textmanip",
     opt = true,
     run = function()
-      map("x", "<C-j>", "<Plug>(textmanip-move-down)", { noremap = false })
-      map("x", "<C-k>", "<Plug>(textmanip-move-up)", { noremap = false })
-      map("x", "<C-h>", "<Plug>(textmanip-move-left)", { noremap = false })
-      map("x", "<C-l>", "<Plug>(textmanip-move-right)", { noremap = false })
+      map("x", "<C-j>", "<Plug>(textmanip-move-down)", { noremap = false, silent = false })
+      map("x", "<C-k>", "<Plug>(textmanip-move-up)", { noremap = false, silent = false })
+      map("x", "<C-h>", "<Plug>(textmanip-move-left)", { noremap = false, silent = false })
+      map("x", "<C-l>", "<Plug>(textmanip-move-right)", { noremap = false, silent = false })
     end,
   }
 }
