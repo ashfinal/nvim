@@ -24,7 +24,7 @@ if pkgs_exist("nvim-web-devicons", "opt") then
   vim.cmd([[
     augroup plugins_devicons
       autocmd!
-      autocmd VimEnter * ++once packadd nvim-web-devicons
+      autocmd BufEnter * ++once packadd nvim-web-devicons
         \| lua require("configs.devicons")
     augroup END
   ]])
@@ -54,7 +54,7 @@ if pkgs_exist("nvim-base16", "opt") then
   vim.cmd([[
     augroup plugins_base16
       autocmd!
-      autocmd VimEnter * ++once packadd nvim-base16
+      autocmd BufEnter * ++once packadd nvim-base16
         \| lua require("configs.base16")
     augroup END
   ]])
