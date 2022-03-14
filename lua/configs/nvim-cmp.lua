@@ -81,6 +81,11 @@ local default = {
     end
   },
 
+  documentation = {
+    -- border = { " ", "─", " ", " ", " ", "─", " ", " " },
+    winhighlight = "NormalFloat:StatusLine,FloatBorder:StatusLine",
+  },
+
   mapping = {
     ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
