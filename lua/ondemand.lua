@@ -152,6 +152,15 @@ if pkgs_exist("fidget.nvim", "opt") then
   ]])
 end
 
+if pkgs_exist("schemastore.nvim", "opt") then
+  vim.cmd([[
+    augroup plugins_schemastore
+      autocmd!
+      autocmd BufReadPre * ++once packadd schemastore.nvim
+    augroup END
+  ]])
+end
+
 if pkgs_exist({ "nvim-treesitter", "nvim-ts-autotag" }, "opt") then
   vim.cmd([[
     augroup plugins_treesitter

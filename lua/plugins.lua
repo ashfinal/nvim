@@ -151,6 +151,13 @@ local plugins = {
     end,
   },
   {
+    "b0o/schemastore.nvim",
+    opt = true,
+    run = function()
+      vim.cmd "packadd schemastore.nvim"
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opt = true,
     run = function()
