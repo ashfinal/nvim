@@ -156,7 +156,7 @@ if pkgs_exist("schemastore.nvim", "opt") then
   vim.cmd([[
     augroup plugins_schemastore
       autocmd!
-      autocmd BufReadPre * ++once packadd schemastore.nvim
+      autocmd VimEnter * ++once packadd schemastore.nvim
     augroup END
   ]])
 end

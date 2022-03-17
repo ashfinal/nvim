@@ -1,7 +1,7 @@
 return {
   settings = {
     json = {
-      schemas = require("schemastore").json.schemastore(),
+      schemas = require("schemastore").json.schemas(),
     }
   }
 }
