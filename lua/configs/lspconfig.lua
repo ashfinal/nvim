@@ -87,6 +87,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 local present2 = pcall(require, "cmp_nvim_lsp")
 if present2 then
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
