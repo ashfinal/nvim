@@ -11,6 +11,7 @@ opt.relativenumber = true
 opt.virtualedit = "block"
 opt.showcmd = false
 opt.showmode = false
+opt.ruler = false
 opt.autochdir = true
 opt.signcolumn = "yes"
 opt.expandtab = true
