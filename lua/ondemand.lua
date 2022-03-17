@@ -101,13 +101,14 @@ if pkgs_exist({ "goto-preview", "nvim-lspconfig" }, "opt") then
   ]])
 end
 
-if pkgs_exist({ "nvim-lspconfig", "nvim-cmp", "cmp-nvim-lsp", "lsp_signature.nvim" }, "opt") then
+if pkgs_exist({ "nvim-lspconfig", "nvim-cmp", "cmp-nvim-lsp", "lsp_signature.nvim", "schemastore.nvim" }, "opt") then
   vim.cmd([[
     augroup plugins_lspconfig
       autocmd!
       autocmd BufReadPre * ++once packadd nvim-cmp
         \| packadd cmp-nvim-lsp
         \| packadd lsp_signature.nvim
+        \| packadd schemastore.nvim
         \| packadd nvim-lspconfig
         \| lua require("cmp_nvim_lsp").setup()
         \ require("configs.lspconfig")
@@ -148,15 +149,6 @@ if pkgs_exist("fidget.nvim", "opt") then
       autocmd!
       autocmd BufReadPre * ++once packadd fidget.nvim
         \| lua require("fidget").setup{}
-    augroup END
-  ]])
-end
-
-if pkgs_exist("schemastore.nvim", "opt") then
-  vim.cmd([[
-    augroup plugins_schemastore
-      autocmd!
-      autocmd VimEnter * ++once packadd schemastore.nvim
     augroup END
   ]])
 end
