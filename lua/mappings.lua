@@ -24,9 +24,9 @@ map("n", "Y", "yg$")
 map("i", "jk", "<Esc>")
 map("t", "jk", "<C-\\><C-n>")
 
-vim.api.nvim_set_keymap("c", "<C-a>", "<Home>", {})
-vim.api.nvim_set_keymap("c", "<C-e>", "<End>", {})
-vim.api.nvim_set_keymap("c", "<C-b>", "<Left>", {})
-vim.api.nvim_set_keymap("c", "<C-f>", "<Right>", {})
-vim.api.nvim_set_keymap("c", "<C-f>", "<Right>", {})
+map("c", "<C-a>", "<Home>", { silent = false })
+map("c", "<C-e>", "<End>", { silent = false })
+map("c", "<C-b>", "<Left>", { silent = false })
+map("c", "<C-f>", "<Right>", { silent = false })
+
 vim.cmd [[nnoremap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]']]
