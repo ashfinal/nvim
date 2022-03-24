@@ -83,6 +83,8 @@ local default = {
 
 require("bufferline").setup(default)
 
+map("n", "]b", "<Cmd>BufferLineCycleNext<CR>")
+map("n", "[b", "<Cmd>BufferLineCyclePrev<CR>")
 map("n", "<Leader>w", "<Cmd>BufferLinePick<CR>")
 map("n", "<M-1>", "<Cmd>BufferLineGoToBuffer 1<CR>")
 map("n", "<M-2>", "<Cmd>BufferLineGoToBuffer 2<CR>")

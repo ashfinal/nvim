@@ -11,8 +11,6 @@ map("i", "<C-e>", "<End>")
 map("i", "<C-b>", "<Left>")
 map("i", "<C-f>", "<Right>")
 
-map("n", "<Tab>", "<Cmd>bn<CR>")
-map("n", "<S-Tab>", "<Cmd>bp<CR>")
 map("n", "<C-k>", "<Cmd>resize +2<CR>")
 map("n", "<C-j>", "<Cmd>resize -2<CR>")
 map("n", "<C-h>", "<Cmd>vertical resize +4<CR>")
