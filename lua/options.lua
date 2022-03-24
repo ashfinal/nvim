@@ -35,7 +35,7 @@ opt.termguicolors = true
 opt.cedit = ""
 opt.synmaxcol = 300
 opt.jumpoptions = "stack"
-opt.shada = [['20,<50,s10,/50,@20,:50,h]]
+opt.shada = [['100,<50,s10,/500,@200,:500,h]]
 opt.fillchars = { vert = " ", eob = " ", fold = " " }
 opt.listchars = { tab = "<->", eol = "¬", trail = "⋅", extends = "»", precedes = "«" }
 
