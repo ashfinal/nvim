@@ -6,6 +6,7 @@ return {
     Lua = {
       runtime = {
         version = "LuaJIT",
+        path = vim.split(package.path, ";"),
       },
       diagnostics = {
         globals = {"vim"},
@@ -13,6 +14,10 @@ return {
       workspace = {
         maxPreload = 1000,
         preloadFileSize = 150,
+        library = {
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        },
       },
     },
   }
