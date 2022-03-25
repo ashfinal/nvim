@@ -312,3 +312,12 @@ if pkgs_exist("vim-textmanip", "opt") then
     augroup END
   ]])
 end
+
+if pkgs_exist("suda.vim", "opt") then
+  vim.cmd([[
+    augroup plugins_suda
+      autocmd!
+      autocmd VimEnter * ++once packadd suda.vim
+    augroup END
+  ]])
+end

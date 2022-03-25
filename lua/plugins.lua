@@ -281,7 +281,14 @@ local plugins = {
       map("x", "<C-h>", "<Plug>(textmanip-move-left)", { noremap = false, silent = false })
       map("x", "<C-l>", "<Plug>(textmanip-move-right)", { noremap = false, silent = false })
     end,
-  }
+  },
+  {
+    "lambdalisue/suda.vim",
+    opt = true,
+    run = function()
+      vim.cmd "packadd suda.vim"
+    end,
+  },
 }
 
 paq(plugins)
