@@ -16,7 +16,7 @@ local default = {
       elseif bufname:match('^fugitive://') then
         -- skip fugitive buffer
         ret = false
-    end
+      end
       return ret
     end
   },
