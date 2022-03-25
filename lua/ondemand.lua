@@ -244,7 +244,7 @@ if pkgs_exist("registers.nvim", "opt") then
   ]])
 end
 
-if pkgs_exist({ "twilight.nvim", "zen-mode" }, "opt") then
+if pkgs_exist({ "twilight.nvim", "zen-mode.nvim" }, "opt") then
   vim.cmd([[
     augroup plugins_zenmode
       autocmd!
