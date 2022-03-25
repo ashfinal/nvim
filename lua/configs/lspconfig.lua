@@ -49,7 +49,6 @@ local on_attach = function(client, bufnr)
   local present1 = pcall(require, "goto-preview")
   if present1 then
     bmap(bufnr, 'n', 'gd', '<Cmd>lua require("goto-preview").goto_preview_definition()<CR>')
-    bmap(bufnr, 'n', 'gl', '<Cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
   end
 end
 
