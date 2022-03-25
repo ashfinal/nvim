@@ -2,7 +2,6 @@ local map = require("utils").map
 
 map("", "<Space>", "<Nop>")
 map("n", "Q", "<Nop>")
-map("n", "gQ", "<Nop>")
 map("", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
 map("", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
 map("n", "<BS>", "<Cmd>nohlsearch<CR>")

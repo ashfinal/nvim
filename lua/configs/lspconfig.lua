@@ -19,7 +19,7 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'gE', '<Cmd>lua vim.diagnostic.open_float({scope = "buffer"})<CR>')
   bmap(bufnr, 'n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>')
   bmap(bufnr, 'n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>')
-  bmap(bufnr, 'n', 'gQ', '<Cmd>lua vim.diagnostic.setloclist()<CR>')
+  bmap(bufnr, 'n', 'gL', '<Cmd>lua vim.diagnostic.setloclist()<CR>')
   bmap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
   bmap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
   bmap(bufnr, 'n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>')
@@ -27,8 +27,6 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'gH', '<Cmd>lua vim.lsp.buf.signature_help()<CR>')
   bmap(bufnr, 'n', 'gs', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>')
   bmap(bufnr, 'n', 'gS', '<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
-  bmap(bufnr, 'n', 'gc', '<Cmd>lua vim.lsp.buf.incoming_calls()<CR>')
-  bmap(bufnr, 'n', 'go', '<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
   bmap(bufnr, 'n', 'gwa', '<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
   bmap(bufnr, 'n', 'gwr', '<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
   bmap(bufnr, 'n', 'gwl', '<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
@@ -36,11 +34,11 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'gm', '<Cmd>lua vim.lsp.buf.rename()<CR>')
   bmap(bufnr, 'n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>')
   bmap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
-  if client.resolved_capabilities.document_formatting then
-    bmap(bufnr, 'n', 'gq', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
-  end
+
   if client.resolved_capabilities.document_range_formatting then
-    bmap(bufnr, 'x', 'gq', '<Cmd>lua vim.lsp.buf.range_formatting()<CR>')
+    vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+  elseif client.resolved_capabilities.document_formatting then
+    bmap(bufnr, 'n', 'Q', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
   end
 
   local present0 = pcall(require, "lsp_signature")
