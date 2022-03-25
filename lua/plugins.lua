@@ -172,6 +172,13 @@ local plugins = {
     end,
   },
   {
+    "SmiteshP/nvim-gps",
+    opt = true,
+    run = function()
+      require("configs.nvim-gps")
+    end,
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     opt = true,
     run = function()

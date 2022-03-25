@@ -60,16 +60,6 @@ if pkgs_exist("nvim-base16", "opt") then
   ]])
 end
 
-if pkgs_exist("lualine.nvim", "opt") then
-  vim.cmd([[
-    augroup plugins_lualine
-      autocmd!
-      autocmd BufEnter * ++once packadd lualine.nvim
-        \| lua require("configs.lualine")
-    augroup END
-  ]])
-end
-
 if pkgs_exist("fzf-lua", "opt") then
   vim.cmd([[
     augroup plugins_fzflua
@@ -153,13 +143,16 @@ if pkgs_exist("fidget.nvim", "opt") then
   ]])
 end
 
-if pkgs_exist({ "nvim-treesitter", "nvim-ts-autotag" }, "opt") then
+if pkgs_exist({ "nvim-treesitter", "nvim-ts-autotag", "nvim-gps", "lualine.nvim" }, "opt") then
   vim.cmd([[
     augroup plugins_treesitter
       autocmd!
-      autocmd VimEnter * ++once packadd nvim-treesitter
+      autocmd BufEnter * ++once packadd nvim-treesitter
         \| packadd nvim-ts-autotag
-        \| lua require("configs.treesitter")
+        \| packadd nvim-gps
+        \| packadd lualine.nvim
+        \| lua require("configs.treesitter") require("configs.nvim-gps")
+        \ require("configs.lualine")
     augroup END
   ]])
 end
