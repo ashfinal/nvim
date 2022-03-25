@@ -205,9 +205,6 @@ if pkgs_exist("Comment.nvim", "opt") then
 end
 
 if pkgs_exist("nvim-tree.lua", "opt") then
-  vim.g.nvim_tree_highlight_opened_files = 1
-  vim.g.nvim_tree_respect_buf_cwd = 1
-  vim.g.nvim_tree_create_in_closed_folder = 1
   vim.cmd([[
     augroup plugins_nvimtree
       autocmd!

@@ -1,5 +1,12 @@
 local map = require("utils").map
 
+vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_respect_buf_cwd = 1
+vim.g.nvim_tree_create_in_closed_folder = 1
+vim.g.nvim_tree_icons = {
+  default = '',
+}
+
 local default = {
   disable_netrw = true,
   hijack_netrw = true,
