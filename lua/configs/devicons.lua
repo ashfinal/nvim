@@ -1,111 +1,63 @@
 local default = {
   override = {
-    c = {
-      icon = "",
-      name = "c",
-    },
     css = {
       icon = "",
+      color = "#ee7744",
       name = "css",
     },
     deb = {
       icon = "",
+      color = "#ff3300",
       name = "deb",
     },
     Dockerfile = {
       icon = "",
+      color = "#384d54",
       name = "Dockerfile",
     },
     html = {
       icon = "",
+      color = "#e34c26",
       name = "html",
-    },
-    jpeg = {
-      icon = "",
-      name = "jpeg",
-    },
-    jpg = {
-      icon = "",
-      name = "jpg",
-    },
-    js = {
-      icon = "",
-      name = "js",
-    },
-    kt = {
-      icon = "󱈙",
-      name = "kt",
     },
     lock = {
       icon = "",
+      color = "#ff8833",
       name = "lock",
-    },
-    lua = {
-      icon = "",
-      name = "lua",
     },
     mp3 = {
       icon = "",
+      color = "#ff8888",
       name = "mp3",
     },
     mp4 = {
       icon = "",
+      color = "#ff1111",
       name = "mp4",
     },
     out = {
       icon = "",
+      color = "#ee6611",
       name = "out",
-    },
-    png = {
-      icon = "",
-      name = "png",
     },
     py = {
       icon = "",
+      color = "#ee7733",
       name = "py",
     },
     ["robots.txt"] = {
       icon = "ﮧ",
+      color = "#ffbbaa",
       name = "robots",
-    },
-    toml = {
-      icon = "",
-      name = "toml",
-    },
-    ts = {
-      icon = "ﯤ",
-      name = "ts",
-    },
-    ttf = {
-      icon = "ℬ",
-      name = "TrueTypeFont",
-    },
-    rb = {
-      icon = "",
-      name = "rb",
-    },
-    rpm = {
-      icon = "",
-      name = "rpm",
-    },
-    vue = {
-      icon = "﵂",
-      name = "vue",
-    },
-    woff = {
-      icon = "ℬ",
-      name = "WebOpenFontFormat",
-    },
-    woff2 = {
-      icon = "ℬ",
-      name = "WebOpenFontFormat2",
     },
     xz = {
       icon = "",
+      color = "#ff11cc",
       name = "xz",
     },
     zip = {
       icon = "",
+      color = "#ff11cc",
       name = "zip",
     },
   },
