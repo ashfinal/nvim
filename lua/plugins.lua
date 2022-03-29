@@ -81,6 +81,14 @@ local plugins = {
     end,
   },
   {
+    "github/copilot.vim",
+    opt = true,
+    run = function()
+      vim.g.copilot_no_tab_map = true
+      map("i", "<C-l>", "copilot#Accept()", { expr = true, script = true })
+    end,
+  },
+  {
     "hrsh7th/nvim-cmp",
     opt = true,
     run = function()

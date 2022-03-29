@@ -117,6 +117,17 @@ if pkgs_exist({ "LuaSnip", "friendly-snippets" }, "opt") then
   ]])
 end
 
+if pkgs_exist("copilot.vim", "opt") then
+  vim.cmd([[
+    augroup plugins_copilot
+      autocmd!
+      autocmd InsertEnter * ++once let g:copilot_no_tab_map = v:true
+        \| imap <silent><script><expr> <C-L> copilot#Accept()
+        \| packadd copilot.vim
+    augroup END
+  ]])
+end
+
 if pkgs_exist({ "nvim-cmp", "cmp-buffer", "cmp-path", "cmp-cmdline", "cmp_luasnip" }, "opt") then
   vim.cmd([[
     augroup plugins_cmp
