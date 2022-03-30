@@ -123,6 +123,7 @@ if pkgs_exist("copilot.vim", "opt") then
       autocmd!
       autocmd InsertEnter * ++once let g:copilot_no_tab_map = v:true
         \| imap <silent><script><expr> <C-L> copilot#Accept()
+        \| imap <C-h> <Plug>(copilot-dismiss)
         \| packadd copilot.vim
     augroup END
   ]])

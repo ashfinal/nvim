@@ -86,6 +86,7 @@ local plugins = {
     run = function()
       vim.g.copilot_no_tab_map = true
       map("i", "<C-l>", "copilot#Accept()", { expr = true, script = true })
+      map("i", "<C-h", "<Plug>(copilot-dismiss)", { noremap = false, silent = false })
     end,
   },
   {
