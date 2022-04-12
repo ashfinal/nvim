@@ -40,22 +40,13 @@ if pkgs_exist("bufdelete.nvim", "opt") then
   ]])
 end
 
-if pkgs_exist("bufferline.nvim", "opt") then
+if pkgs_exist({ "nvim-base16", "bufferline.nvim" }, "opt") then
   vim.cmd([[
     augroup plugins_bufferline
       autocmd!
-      autocmd BufEnter * ++once packadd bufferline.nvim
-        \| lua require("configs.bufferline")
-    augroup END
-  ]])
-end
-
-if pkgs_exist("nvim-base16", "opt") then
-  vim.cmd([[
-    augroup plugins_base16
-      autocmd!
       autocmd BufEnter * ++once packadd nvim-base16
-        \| lua require("configs.base16")
+        \| packadd bufferline.nvim 
+        \| lua require("configs.base16") require("configs.bufferline")
     augroup END
   ]])
 end
