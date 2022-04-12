@@ -38,6 +38,16 @@ local default = {
         padding = 1,
         text_align = "left",
       },
+      {
+        filetype = "undotree",
+        text = "Undotree",
+        padding = 1,
+      },
+      {
+        filetype = "DiffviewFiles",
+        text = "Diff View",
+        padding = 1,
+      },
     },
   }
 }

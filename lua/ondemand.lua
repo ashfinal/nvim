@@ -45,7 +45,7 @@ if pkgs_exist({ "nvim-base16", "bufferline.nvim" }, "opt") then
     augroup plugins_bufferline
       autocmd!
       autocmd BufEnter * ++once packadd nvim-base16
-        \| packadd bufferline.nvim 
+        \| packadd bufferline.nvim
         \| lua require("configs.base16") require("configs.bufferline")
     augroup END
   ]])
