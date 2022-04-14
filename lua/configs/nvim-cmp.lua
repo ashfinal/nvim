@@ -76,9 +76,12 @@ local default = {
     end
   },
 
-  documentation = {
-    -- border = { " ", "─", " ", " ", " ", "─", " ", " " },
-    winhighlight = "NormalFloat:StatusLine,FloatBorder:StatusLine",
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    documentation = {
+      -- border = { " ", "─", " ", " ", " ", "─", " ", " " },
+      winhighlight = "NormalFloat:StatusLine,Float:StatusLine",
+    },
   },
 
   mapping = {
