@@ -5,9 +5,8 @@ vim.cmd([[
   augroup END
 ]])
 
-local function try_stopping_lspserver()
-  local cbuf = tonumber(vim.fn.expand("<abuf>"))
-  vim.lsp.for_each_buffer_client(cbuf, function(_, client_id, bufnr)
+local function try_stopping_lspserver(args)
+  vim.lsp.for_each_buffer_client(args['buf'], function(_, client_id, bufnr)
     local bufs = vim.lsp.get_buffers_by_client_id(client_id)
     vim.lsp.buf_detach_client(bufnr, client_id)
     if vim.tbl_count(bufs) == 1 and bufs[1] == bufnr then
