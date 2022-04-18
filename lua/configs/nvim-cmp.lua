@@ -77,11 +77,14 @@ local default = {
   },
 
   window = {
-    -- completion = cmp.config.window.bordered(),
-    documentation = {
-      -- border = { " ", "─", " ", " ", " ", "─", " ", " " },
-      winhighlight = "NormalFloat:StatusLine,Float:StatusLine",
-    },
+    completion = cmp.config.window.bordered({
+      border = 'none',
+      winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+    }),
+    documentation = cmp.config.window.bordered({
+      border = 'solid',
+      winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu',
+    }),
   },
 
   mapping = {
