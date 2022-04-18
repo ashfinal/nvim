@@ -10,10 +10,6 @@ local function pkgs_exist(pkgs, dir)
   return true
 end
 
-if pkgs_exist("filetype.nvim", "start") then
-  vim.g.did_load_filetypes = 1
-end
-
 if pkgs_exist("vim-matchup", "start") then
   vim.g.loaded_matchit = 1
   vim.g.matchup_matchparen_offscreen = { method = 'popup' }

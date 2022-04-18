@@ -8,7 +8,6 @@ local map = require("utils").map
 
 local plugins = {
   { "savq/paq-nvim", opt = true },
-  { "nathom/filetype.nvim" },
   { "andymass/vim-matchup" },
   {
     "kyazdani42/nvim-web-devicons",
