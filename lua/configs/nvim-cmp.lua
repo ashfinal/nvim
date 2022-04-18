@@ -101,7 +101,7 @@ local default = {
       else
         fallback()
       end
-    end, { "i", "s" }),
+    end, { "i", "s", "c" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if present2 then
         if luasnip.in_snippet() and luasnip.jumpable(-1) then
@@ -116,7 +116,7 @@ local default = {
       else
         fallback()
       end
-    end, { "i", "s" }),
+    end, { "i", "s", "c" }),
     ['<C-y>'] = cmp.config.disable,
     ['<C-e>'] = cmp.mapping(function(fallback)
       cmp.close()
