@@ -16,6 +16,7 @@ end
 
 local default = {
   options = {
+    globalstatus = true,
     icons_enabled = true,
     theme = 'auto',
     component_separators = '',
