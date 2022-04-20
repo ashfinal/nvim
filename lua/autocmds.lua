@@ -38,3 +38,11 @@ vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
   group = "autostop_lspserver",
   desc = "Detach LSP client when buffer is deleted and stop server if no buffers are attached",
 })
+
+vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+  pattern = "*",
+  command = "TSBufDisable incremental_selection",
+  group = "cmdwin_treesitter",
+  desc = "Disable treesitter's incremental selection in Command-line window",
+})
