@@ -191,7 +191,7 @@ if pkgs_exist("Comment.nvim", "opt") then
     augroup plugins_comment
       autocmd!
       autocmd BufReadPost * ++once packadd Comment.nvim
-        \| lua require("Comment").setup()
+        \| lua require("configs.comment")
     augroup END
   ]])
 end

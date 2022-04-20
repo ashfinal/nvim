@@ -212,7 +212,7 @@ local plugins = {
     "numToStr/Comment.nvim",
     opt = true,
     run = function()
-      require('Comment').setup()
+      require("configs.comment")
     end,
   },
   {
