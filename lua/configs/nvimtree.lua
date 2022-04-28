@@ -28,7 +28,6 @@ local default = {
     timeout = 500,
   },
   view = {
-    allow_resize = true,
     side = "left",
     width = 30,
     hide_root_folder = false,
