@@ -32,20 +32,18 @@ local default = {
     offsets = {
       {
         filetype = "NvimTree",
-        text = function()
-          return vim.fn.getcwd()
-        end,
+        text = "",
         padding = 1,
         text_align = "left",
       },
       {
         filetype = "undotree",
-        text = "Undotree",
+        text = "",
         padding = 1,
       },
       {
         filetype = "DiffviewFiles",
-        text = "Diff View",
+        text = "",
         padding = 1,
       },
     },
