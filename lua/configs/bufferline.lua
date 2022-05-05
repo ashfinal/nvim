@@ -4,7 +4,7 @@ local default = {
   options = {
     always_show_bufferline = true,
     numbers = function(opts)
-      return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+      return string.format('%s', opts.raise(opts.id))
     end,
     close_command = "bdelete! %d",
     right_mouse_command = function(bufnr)
