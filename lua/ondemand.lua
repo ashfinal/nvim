@@ -310,3 +310,12 @@ if pkgs_exist("suda.vim", "opt") then
     augroup END
   ]])
 end
+
+if pkgs_exist("vim-fugitive", "opt") then
+  vim.cmd([[
+    augroup plugins_fugitive
+      autocmd!
+      autocmd VimEnter * ++once packadd vim-fugitive
+    augroup END
+  ]])
+end

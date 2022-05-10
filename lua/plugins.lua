@@ -304,6 +304,13 @@ local plugins = {
       vim.cmd "packadd suda.vim"
     end,
   },
+  {
+    "tpope/vim-fugitive",
+    opt = true,
+    run = function()
+      vim.cmd "packadd vim-fugitive"
+    end,
+  },
 }
 
 paq(plugins)
