@@ -230,7 +230,7 @@ local plugins = {
     end,
   },
   {
-    "chentau/marks.nvim",
+    "chentoast/marks.nvim",
     opt = true,
     run = function()
       require("configs.marks")
