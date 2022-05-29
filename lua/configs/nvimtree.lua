@@ -1,19 +1,14 @@
 local map = require("utils").map
 
-vim.g.nvim_tree_highlight_opened_files = 1
-vim.g.nvim_tree_respect_buf_cwd = 1
-vim.g.nvim_tree_create_in_closed_folder = 1
-vim.g.nvim_tree_icons = {
-  default = '',
-}
-
 local default = {
+  create_in_closed_folder = true,
   disable_netrw = true,
   hijack_netrw = true,
   ignore_ft_on_setup = { "dashboard" },
   auto_reload_on_write = true,
   hijack_cursor = true,
   update_cwd = true,
+  respect_buf_cwd = true,
   update_focused_file = {
     enable = true,
     update_cwd = false,
@@ -32,6 +27,9 @@ local default = {
     width = 30,
     hide_root_folder = false,
     signcolumn = "yes"
+  },
+  renderer = {
+    highlight_opened_files = "all",
   },
 }
 
