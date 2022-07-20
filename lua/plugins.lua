@@ -237,13 +237,6 @@ local plugins = {
     end,
   },
   {
-    "tversteeg/registers.nvim",
-    opt = true,
-    run = function()
-      require("configs.registers")
-    end,
-  },
-  {
     "folke/twilight.nvim",
     opt = true,
     run = function()

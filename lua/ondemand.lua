@@ -226,16 +226,6 @@ if pkgs_exist("marks.nvim", "opt") then
   ]])
 end
 
-if pkgs_exist("registers.nvim", "opt") then
-  vim.cmd([[
-    augroup plugins_registers
-      autocmd!
-      autocmd BufReadPost * ++once packadd registers.nvim
-        \| lua require("configs.registers")
-    augroup END
-  ]])
-end
-
 if pkgs_exist({ "twilight.nvim", "zen-mode.nvim" }, "opt") then
   vim.cmd([[
     augroup plugins_zenmode
