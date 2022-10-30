@@ -35,9 +35,9 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>')
   bmap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
 
-  if client.resolved_capabilities.document_range_formatting then
+  if client.server_capabilities.document_range_formatting then
     vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
-  elseif client.resolved_capabilities.document_formatting then
+  elseif client.server_capabilities.document_formatting then
     bmap(bufnr, 'n', 'Q', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
   end
 
@@ -91,10 +91,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-local present2 = pcall(require, "cmp_nvim_lsp")
-if present2 then
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-end
 
 local default = {
   on_attach = on_attach,
@@ -119,5 +115,10 @@ local servers = vim.tbl_map(function(file) return string.sub(file, 1, -5) end, f
 for _, lsp in pairs(servers) do
   local conf = require(string.format("configs.lsp_servers.%s", lsp))
   conf = vim.tbl_deep_extend("force", default, conf)
+  local present2 = pcall(require, "cmp_nvim_lsp")
+  if present2 then
+    local defcap = require('cmp_nvim_lsp').default_capabilities()
+    conf = vim.tbl_deep_extend("force", conf, { capabilities = defcap })
+  end
   require('lspconfig')[lsp].setup(conf)
 end
