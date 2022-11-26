@@ -180,10 +180,10 @@ local plugins = {
     end,
   },
   {
-    "SmiteshP/nvim-gps",
+    "SmiteshP/nvim-navic",
     opt = true,
     run = function()
-      require("configs.nvim-gps")
+      require("configs.nvim-navic")
     end,
   },
   {

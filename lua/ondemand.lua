@@ -142,15 +142,15 @@ if pkgs_exist("fidget.nvim", "opt") then
   ]])
 end
 
-if pkgs_exist({ "nvim-treesitter", "nvim-ts-autotag", "nvim-gps", "lualine.nvim" }, "opt") then
+if pkgs_exist({ "nvim-treesitter", "nvim-ts-autotag", "nvim-navic", "lualine.nvim" }, "opt") then
   vim.cmd([[
     augroup plugins_treesitter
       autocmd!
       autocmd BufEnter * ++once packadd nvim-treesitter
         \| packadd nvim-ts-autotag
-        \| packadd nvim-gps
+        \| packadd nvim-navic
         \| packadd lualine.nvim
-        \| lua require("configs.treesitter") require("configs.nvim-gps")
+        \| lua require("configs.treesitter") require("configs.nvim-navic")
         \ require("configs.lualine")
     augroup END
   ]])

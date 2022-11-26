@@ -50,6 +50,13 @@ local on_attach = function(client, bufnr)
   if present1 then
     bmap(bufnr, 'n', 'gd', '<Cmd>lua require("goto-preview").goto_preview_definition()<CR>')
   end
+
+  local present2 = pcall(require, "nvim-navic")
+  if present2 then
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
+  end
 end
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }

@@ -44,9 +44,9 @@ local default = {
   extensions = {}
 }
 
-local present, gps = pcall(require, "nvim-gps")
+local present, navic = pcall(require, "nvim-navic")
 if present then
-  default["sections"]["lualine_c"][3] = { gps.get_location, cond = gps.is_available }
+  default["sections"]["lualine_c"][3] = { navic.get_location, cond = navic.is_available }
 end
 
 require("lualine").setup(default)
