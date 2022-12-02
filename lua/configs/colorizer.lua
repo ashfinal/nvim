@@ -3,7 +3,7 @@ local default = {
     "vim",
     "html",
     "css",
-    "sass",
+    "scss",
     "javascript",
     "typescript",
   },

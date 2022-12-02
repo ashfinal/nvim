@@ -1,5 +1,3 @@
-local map = require("utils").map
-
 local default = {
   winopts = {
     preview = {
@@ -10,13 +8,13 @@ local default = {
 
 require("fzf-lua").setup(default)
 
-map("n", "<Leader>bb", [[<Cmd>lua require('fzf-lua').buffers()<CR>]])
-map("n", "<Leader>fl", [[<Cmd>lua require('fzf-lua').lines()<CR>]])
-map("n", "<Leader>ff", [[<Cmd>lua require('fzf-lua').files()<CR>]])
-map("n", "<Leader>fo", [[<Cmd>lua require('fzf-lua').oldfiles()<CR>]])
-map("n", "<Leader>jj", [[<Cmd>lua require('fzf-lua').jumps()<CR>]])
-map("n", "<Leader>mm", [[<Cmd>lua require('fzf-lua').marks()<CR>]])
-map("n", "<Leader>fw", [[<Cmd>lua require('fzf-lua').live_grep_native()<CR>]])
-map("n", "<Leader>fm", [[<Cmd>lua require('fzf-lua').git_commits()<CR>]])
-map("n", "<Leader>bm", [[<Cmd>lua require('fzf-lua').git_bcommits()<CR>]])
-map("n", "<Leader>?", [[<Cmd>lua require('fzf-lua').keymaps()<CR>]])
+vim.keymap.set("n", "<Leader>bb", function() return require('fzf-lua').buffers() end, { silent = true, desc = "Fuzzy find buffers" })
+vim.keymap.set("n", "<Leader>fl", function() return require('fzf-lua').lines() end, { silent = true, desc = "Fuzzy find lines" })
+vim.keymap.set("n", "<Leader>ff", function() return require('fzf-lua').files() end, { silent = true, desc = "Fuzzy find files" })
+vim.keymap.set("n", "<Leader>fo", function() return require('fzf-lua').oldfiles() end, { silent = true, desc = "Fuzzy find oldfiles" })
+vim.keymap.set("n", "<Leader>jj", function() return require('fzf-lua').jumps() end, { silent = true, desc = "Fuzzy find jumps" })
+vim.keymap.set("n", "<Leader>mm", function() return require('fzf-lua').marks() end, { silent = true, desc = "Fuzzy find marks" })
+vim.keymap.set("n", "<Leader>fw", function() return require('fzf-lua').live_grep_native() end, { silent = true, desc = "Live grep" })
+vim.keymap.set("n", "<Leader>fm", function() return require('fzf-lua').git_commits() end, { silent = true, desc = "Fuzzy find git commits" })
+vim.keymap.set("n", "<Leader>bm", function() return require('fzf-lua').git_bcommits() end, { silent = true, desc = "Fuzzy find git bcommits" })
+vim.keymap.set("n", "<Leader>?", function() return require('fzf-lua').keymaps() end, { silent = true, desc = "Fuzzy find keymaps" })

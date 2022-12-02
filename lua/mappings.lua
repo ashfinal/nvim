@@ -1,29 +1,20 @@
-local map = require("utils").map
+vim.keymap.set("", "j", "v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj'", { expr = true })
+vim.keymap.set("", "k", "v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk'", { expr = true })
+vim.keymap.set("n", "<BS>", "<Cmd>nohlsearch<CR>")
+vim.keymap.set({"i", "c"}, "<C-a>", "<Home>")
+vim.keymap.set({"i", "c"}, "<C-e>", "<End>")
+vim.keymap.set({"i", "c"}, "<C-b>", "<Left>")
+vim.keymap.set({"i", "c"}, "<C-f>", "<Right>")
 
-map("", "<Space>", "<Nop>")
-map("n", "Q", "<Nop>")
-map("", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
-map("", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
-map("n", "<BS>", "<Cmd>nohlsearch<CR>")
-map("i", "<C-a>", "<Esc>^i")
-map("i", "<C-e>", "<End>")
-map("i", "<C-b>", "<Left>")
-map("i", "<C-f>", "<Right>")
+vim.keymap.set("n", "<C-k>", "<Cmd>resize +2<CR>")
+vim.keymap.set("n", "<C-j>", "<Cmd>resize -2<CR>")
+vim.keymap.set("n", "<C-h>", "<Cmd>vertical resize +4<CR>")
+vim.keymap.set("n", "<C-l>", "<Cmd>vertical resize -4<CR>")
 
-map("n", "<C-k>", "<Cmd>resize +2<CR>")
-map("n", "<C-j>", "<Cmd>resize -2<CR>")
-map("n", "<C-h>", "<Cmd>vertical resize +4<CR>")
-map("n", "<C-l>", "<Cmd>vertical resize -4<CR>")
+vim.keymap.set("v", "p", '"_dP')
+vim.keymap.set("n", "Y", "yg$")
 
-map("v", "p", '"_dP')
-map("n", "Y", "yg$")
-
-map("i", "jk", "<Esc>")
-map("t", "jk", "<C-\\><C-n>")
-
-map("c", "<C-a>", "<Home>", { silent = false })
-map("c", "<C-e>", "<End>", { silent = false })
-map("c", "<C-b>", "<Left>", { silent = false })
-map("c", "<C-f>", "<Right>", { silent = false })
+vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("t", "jk", "<C-\\><C-n>")
 
 vim.cmd [[nnoremap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]']]

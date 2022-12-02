@@ -1,304 +1,209 @@
-local present, paq = pcall(require, "bootstrap")
+local present, dep = pcall(require, "bootstrap")
 
 if not present then
   return false
 end
 
-local map = require("utils").map
-
 local plugins = {
-  { "savq/paq-nvim", opt = true },
-  { "andymass/vim-matchup" },
+  "chiyadev/dep",
+  {
+    "andymass/vim-matchup",
+    setup = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      vim.g.matchup_delim_noskips = 2
+    end,
+  },
   {
     "kyazdani42/nvim-web-devicons",
-    opt = true,
-    run = function()
+    function()
       require("configs.devicons")
     end,
   },
   {
     "akinsho/bufferline.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.bufferline")
     end,
+    requires = { "kyazdani42/nvim-web-devicons" }
   },
   {
     "famiu/bufdelete.nvim",
-    opt = true,
-    run = function()
-      map("n", "<Leader>x", "<Cmd>lua require('bufdelete').bufdelete(0, true)<CR>")
+    function()
+      vim.keymap.set("n", "<Leader>x", function() return require("bufdelete").bufdelete(0, true) end, { silent = true, desc = "Delete buffers without losing window layout" })
     end,
   },
   {
     "RRethy/nvim-base16",
-    opt = true,
-    run = function()
-      require("configs.base16")
+    function()
+      require("base16-colorscheme").setup("onedark")
     end,
   },
   {
     "nvim-lualine/lualine.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.lualine")
     end,
-  },
-  {
-    "nvim-lua/plenary.nvim",
-    opt = true,
-    run = function()
-      vim.cmd "packadd plenary.nvim"
-    end,
+    requires = { "kyazdani42/nvim-web-devicons","SmiteshP/nvim-navic" }
   },
   {
     "ibhagwan/fzf-lua",
-    opt = true,
-    run = function()
+    function()
       require("configs.fzflua")
     end,
   },
   {
     "lewis6991/gitsigns.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.gitsigns")
     end,
   },
   {
     "rafamadriz/friendly-snippets",
-    opt = true,
-    run = function()
-      vim.cmd "packadd friendly-snippets"
+    function()
+      require("luasnip.loaders.from_vscode").lazy_load()
     end,
+    requires = { "L3MON4D3/LuaSnip" }
   },
   {
     "L3MON4D3/LuaSnip",
-    opt = true,
-    run = function()
+    function()
       require("configs.luasnip")
     end,
   },
   {
     "github/copilot.vim",
-    opt = true,
-    run = function()
+    function()
+      vim.keymap.set("i", "<C-.>", "copilot#Accept('<CR>')", { silent = true, expr = true, script = true })
+    end,
+    setup = function()
       vim.g.copilot_no_tab_map = true
-      map("i", "<C-l>", "copilot#Accept()", { expr = true, script = true })
-      map("i", "<C-h", "<Plug>(copilot-dismiss)", { noremap = false, silent = false })
     end,
   },
   {
     "hrsh7th/nvim-cmp",
-    opt = true,
-    run = function()
+    function()
       require("configs.nvim-cmp")
     end,
-  },
-  {
-    "hrsh7th/cmp-buffer",
-    opt = true,
-    run = function()
-      require("configs.cmp-buffer")
-    end,
-  },
-  {
-    "hrsh7th/cmp-path",
-    opt = true,
-    run = function()
-      require("configs.cmp-path")
-    end,
-  },
-  {
-    "hrsh7th/cmp-cmdline",
-    opt = true,
-    run = function()
-      require("configs.cmp-cmdline")
-    end,
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-    opt = true,
-    run = function()
-      require("configs.cmp_luasnip")
-    end,
-  },
-  {
-    "hrsh7th/cmp-nvim-lsp",
-    opt = true,
-    run = function()
-      require("cmp_nvim_lsp").setup()
-    end,
+    deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp" },
   },
   {
     "neovim/nvim-lspconfig",
-    opt = true,
-    run = function()
+    function()
       require("configs.lspconfig")
     end,
-  },
-  {
-    "rmagatti/goto-preview",
-    opt = true,
-    run = function()
-      require("configs.gotopreview")
-    end,
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    opt = true,
-    run = function()
-      vim.cmd "packadd lsp_signature.nvim"
-    end,
+    requires = { "ray-x/lsp_signature.nvim", "b0o/schemastore.nvim", "SmiteshP/nvim-navic" },
+    deps = { "j-hui/fidget.nvim" },
   },
   {
     "j-hui/fidget.nvim",
-    opt = true,
-    run = function()
-      require("fidget").setup{}
-    end,
-  },
-  {
-    "b0o/schemastore.nvim",
-    opt = true,
-    run = function()
-      vim.cmd "packadd schemastore.nvim"
+    function()
+      require("fidget").setup()
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opt = true,
-    run = function()
+    function()
       require("configs.treesitter")
     end,
-  },
-  {
-    "windwp/nvim-ts-autotag",
-    opt = true,
-    run = function()
-      vim.cmd "packadd nvim-ts-autotag"
-    end,
+    deps = { "SmiteshP/nvim-navic", "windwp/nvim-ts-autotag", "windwp/nvim-autopairs" },
   },
   {
     "SmiteshP/nvim-navic",
-    opt = true,
-    run = function()
+    function()
       require("configs.nvim-navic")
     end,
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.blankline")
     end,
   },
   {
     "NvChad/nvim-colorizer.lua",
-    opt = true,
-    run = function()
+    function()
       require("configs.colorizer")
-      vim.cmd "ColorizerReloadAllBuffers"
+      vim.cmd("ColorizerReloadAllBuffers")
     end,
   },
   {
     "windwp/nvim-autopairs",
-    opt = true,
-    run = function()
+    function()
       require("configs.autopairs")
     end,
   },
   {
     "numToStr/Comment.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.comment")
     end,
   },
   {
     "kyazdani42/nvim-tree.lua",
-    opt = true,
-    run = function()
+    function()
       require("configs.nvimtree")
     end,
   },
   {
     "kevinhwang91/nvim-bqf",
-    opt = true,
-    run = function()
+    function()
       require("configs.nvim-bqf")
     end,
   },
   {
     "chentoast/marks.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.marks")
     end,
   },
   {
     "folke/twilight.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.twilight")
     end,
   },
   {
     "folke/zen-mode.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.zenmode")
     end,
   },
   {
     "numToStr/FTerm.nvim",
-    opt = true,
-    run = function()
+    function()
       require("configs.fterm")
     end,
   },
   {
     "machakann/vim-sandwich",
-    opt = true,
-    run = function()
-      vim.cmd "packadd vim-sandwich"
-    end,
   },
   {
     "mbbill/undotree",
-    opt = true,
-    run = function()
+    function()
       vim.g.undotree_SetFocusWhenToggle = true
-      map("n", "<Leader>u", "<Cmd>UndotreeToggle<CR>")
+      vim.keymap.set("n", "<Leader>u", "<Cmd>UndotreeToggle<CR>")
     end,
   },
   {
     "junegunn/vim-easy-align",
-    opt = true,
-    run = function()
-      map("x", "gz", "<Plug>(EasyAlign)", { noremap = false, silent = false })
-      map("n", "gz", "<Plug>(EasyAlign)", { noremap = false, silent = false })
+    function()
+      vim.keymap.set({"x", "n"}, "gz", "<Plug>(EasyAlign)")
     end,
   },
   {
     "t9md/vim-textmanip",
-    opt = true,
-    run = function()
-      map("x", "<C-j>", "<Plug>(textmanip-move-down)", { noremap = false, silent = false })
-      map("x", "<C-k>", "<Plug>(textmanip-move-up)", { noremap = false, silent = false })
-      map("x", "<C-h>", "<Plug>(textmanip-move-left)", { noremap = false, silent = false })
-      map("x", "<C-l>", "<Plug>(textmanip-move-right)", { noremap = false, silent = false })
+    function()
+      vim.keymap.set("x", "<C-j>", "<Plug>(textmanip-move-down)")
+      vim.keymap.set("x", "<C-k>", "<Plug>(textmanip-move-up)")
+      vim.keymap.set("x", "<C-h>", "<Plug>(textmanip-move-left)")
+      vim.keymap.set("x", "<C-l>", "<Plug>(textmanip-move-right)")
     end,
   },
   {
     "lambdalisue/suda.vim",
-    opt = true,
-    run = function()
-      vim.cmd "packadd suda.vim"
-    end,
   },
 }
 
-paq(plugins)
+dep(plugins)
 
-if vim.g.paq_bootstrap then paq:sync() end
+if vim.g.dep_bootstrap then dep:sync() end

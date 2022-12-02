@@ -1,4 +1,4 @@
-local function check_invisible_chars()
+local function reveal_invisible_chars()
   if vim.bo.modifiable then
     local trailing_pat = [[\s\+$]]
     local space_pat = [[^\s\+]]
@@ -13,12 +13,12 @@ local function check_invisible_chars()
   end
 end
 
-vim.api.nvim_create_augroup("show_invisible_chars", { clear = true })
+vim.api.nvim_create_augroup("reveal_invisible_chars", { clear = true })
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
   pattern = "*",
-  callback = check_invisible_chars,
-  group = "show_invisible_chars",
-  desc = "Check for invisible characters and find inconsistency, show them if needed",
+  callback = reveal_invisible_chars,
+  group = "reveal_invisible_chars",
+  desc = "Check for invisible characters and find inconsistency, reveal them if necessary",
 })
 
 local function try_stopping_lspserver(args)
@@ -37,12 +37,4 @@ vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
   callback = try_stopping_lspserver,
   group = "autostop_lspserver",
   desc = "Detach LSP client when buffer is deleted and stop server if no buffers are attached",
-})
-
-vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
-vim.api.nvim_create_autocmd("CmdwinEnter", {
-  pattern = "*",
-  command = "TSBufDisable incremental_selection",
-  group = "cmdwin_treesitter",
-  desc = "Disable treesitter's incremental selection in Command-line window",
 })

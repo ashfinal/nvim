@@ -39,7 +39,7 @@ local default = {
   },
 }
 
-require'nvim-treesitter.configs'.setup(default)
+require("nvim-treesitter.configs").setup(default)
 
 vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
 vim.api.nvim_create_autocmd("CmdwinEnter", {

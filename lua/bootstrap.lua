@@ -1,32 +1,32 @@
-local paq_path = vim.fn.stdpath "data" .. "/site/pack/paqs/opt/paq-nvim"
+local path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
 
-if vim.fn.empty(vim.fn.glob(paq_path)) ~= 1 then
-  vim.cmd "packadd paq-nvim"
+if vim.fn.empty(vim.fn.glob(path)) ~= 1 then
+  vim.cmd("packadd dep")
 end
 
 local bootstrap = nil
-local present, paq = pcall(require, "paq")
+local present, dep = pcall(require, "dep")
 
 if not present then
-  print "Cloning paq-nvim..."
+  print "Cloning package manager-dep..."
   bootstrap = vim.fn.system {
     "git",
     "clone",
     "--depth=1",
-    "https://github.com/savq/paq-nvim.git",
-    paq_path,
+    "https://github.com/chiyadev/dep.git",
+    path,
   }
 
-  vim.cmd "packadd paq-nvim"
-  present, paq = pcall(require, "paq")
+  vim.cmd("packadd dep")
+  present, dep = pcall(require, "dep")
 
   if present then
-    print "Paq-nvim cloned successfully."
+    print "Dep cloned successfully."
   else
-    error("Couldn't clone paq-nvim!")
+    error("Couldn't clone dep!")
   end
 end
 
-if bootstrap then vim.g.paq_bootstrap = true end
+if bootstrap then vim.g.dep_bootstrap = true end
 
-return paq
+return dep

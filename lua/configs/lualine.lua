@@ -18,25 +18,25 @@ local default = {
   options = {
     globalstatus = true,
     icons_enabled = true,
-    theme = 'auto',
-    component_separators = '',
-    section_separators = {left = '', right = ''},
-    disabled_filetypes = {'NvimTree'},
+    theme = "auto",
+    component_separators = "",
+    section_separators = { left = "", right = "" },
+    disabled_filetypes = { "NvimTree" },
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = {'fileformat'},
-    lualine_b = {{'b:gitsigns_head', icon = ''}, {'diff', source = diff_source}, 'diagnostics'},
-    lualine_c = {'filename', { dirname }},
-    lualine_x = {'encoding'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { "fileformat" },
+    lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
+    lualine_c = { "filename", { dirname } },
+    lualine_x = { "encoding" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
     lualine_y = {},
     lualine_z = {}
   },
@@ -44,9 +44,7 @@ local default = {
   extensions = {}
 }
 
-local present, navic = pcall(require, "nvim-navic")
-if present then
-  default["sections"]["lualine_c"][3] = { navic.get_location, cond = navic.is_available }
-end
+local navic = require("nvim-navic")
+default["sections"]["lualine_c"][3] = { navic.get_location, cond = navic.is_available }
 
 require("lualine").setup(default)

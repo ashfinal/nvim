@@ -8,4 +8,4 @@ local default = {
   map_bs = false,
 }
 
-require('nvim-autopairs').setup(default)
+require("nvim-autopairs").setup(default)

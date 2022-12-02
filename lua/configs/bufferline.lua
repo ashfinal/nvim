@@ -1,5 +1,3 @@
-local map = require("utils").map
-
 local default = {
   options = {
     always_show_bufferline = true,
@@ -52,15 +50,15 @@ local default = {
 
 require("bufferline").setup(default)
 
-map("n", "]b", "<Cmd>BufferLineCycleNext<CR>")
-map("n", "[b", "<Cmd>BufferLineCyclePrev<CR>")
-map("n", "<Leader>w", "<Cmd>BufferLinePick<CR>")
-map("n", "<M-1>", "<Cmd>BufferLineGoToBuffer 1<CR>")
-map("n", "<M-2>", "<Cmd>BufferLineGoToBuffer 2<CR>")
-map("n", "<M-3>", "<Cmd>BufferLineGoToBuffer 3<CR>")
-map("n", "<M-4>", "<Cmd>BufferLineGoToBuffer 4<CR>")
-map("n", "<M-5>", "<Cmd>BufferLineGoToBuffer 5<CR>")
-map("n", "<M-6>", "<Cmd>BufferLineGoToBuffer 6<CR>")
-map("n", "<M-7>", "<Cmd>BufferLineGoToBuffer 7<CR>")
-map("n", "<M-8>", "<Cmd>BufferLineGoToBuffer 8<CR>")
-map("n", "<M-9>", "<Cmd>BufferLineGoToBuffer 9<CR>")
+vim.keymap.set("n", "]b", "<Cmd>BufferLineCycleNext<CR>")
+vim.keymap.set("n", "[b", "<Cmd>BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "<Leader>w", "<Cmd>BufferLinePick<CR>")
+vim.keymap.set("n", "<M-1>", "<Cmd>BufferLineGoToBuffer 1<CR>")
+vim.keymap.set("n", "<M-2>", "<Cmd>BufferLineGoToBuffer 2<CR>")
+vim.keymap.set("n", "<M-3>", "<Cmd>BufferLineGoToBuffer 3<CR>")
+vim.keymap.set("n", "<M-4>", "<Cmd>BufferLineGoToBuffer 4<CR>")
+vim.keymap.set("n", "<M-5>", "<Cmd>BufferLineGoToBuffer 5<CR>")
+vim.keymap.set("n", "<M-6>", "<Cmd>BufferLineGoToBuffer 6<CR>")
+vim.keymap.set("n", "<M-7>", "<Cmd>BufferLineGoToBuffer 7<CR>")
+vim.keymap.set("n", "<M-8>", "<Cmd>BufferLineGoToBuffer 8<CR>")
+vim.keymap.set("n", "<M-9>", "<Cmd>BufferLineGoToBuffer 9<CR>")

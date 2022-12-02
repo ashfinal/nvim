@@ -1,5 +1,3 @@
-local bmap = require("utils").bmap
-
 local signature = {
   bind = true,
   doc_lines = 0,
@@ -15,47 +13,36 @@ local signature = {
 
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  bmap(bufnr, 'n', 'ge', '<Cmd>lua vim.diagnostic.open_float()<CR>')
-  bmap(bufnr, 'n', 'gE', '<Cmd>lua vim.diagnostic.open_float({scope = "buffer"})<CR>')
-  bmap(bufnr, 'n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>')
-  bmap(bufnr, 'n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>')
-  bmap(bufnr, 'n', 'gL', '<Cmd>lua vim.diagnostic.setloclist()<CR>')
-  bmap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-  bmap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
-  bmap(bufnr, 'n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>')
-  bmap(bufnr, 'n', 'gl', '<Cmd>lua vim.lsp.buf.implementation()<CR>')
-  bmap(bufnr, 'n', 'gH', '<Cmd>lua vim.lsp.buf.signature_help()<CR>')
-  bmap(bufnr, 'n', 'gs', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>')
-  bmap(bufnr, 'n', 'gS', '<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
-  bmap(bufnr, 'n', 'gwa', '<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-  bmap(bufnr, 'n', 'gwr', '<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-  bmap(bufnr, 'n', 'gwl', '<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-  bmap(bufnr, 'n', 'gy', '<Cmd>lua vim.lsp.buf.type_definition()<CR>')
-  bmap(bufnr, 'n', 'gm', '<Cmd>lua vim.lsp.buf.rename()<CR>')
-  bmap(bufnr, 'n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>')
-  bmap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>')
+  vim.keymap.set("n", "ge", function() return vim.diagnostic.open_float() end, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
+  vim.keymap.set("n", "gE", function() return vim.diagnostic.open_float({scope = 'buffer'}) end, { silent = true, buffer = bufnr, desc = "Show buffer diagnostics" })
+  vim.keymap.set("n", "[d", function() return vim.diagnostic.goto_prev() end, { silent = true, buffer = bufnr, desc = "Go to previous diagnostic" })
+  vim.keymap.set("n", "]d", function() return vim.diagnostic.goto_next() end, { silent = true, buffer = bufnr, desc = "Go to next diagnostic" })
+  vim.keymap.set("n", "gL", function() return vim.diagnostic.setloclist() end, { silent = true, buffer = bufnr, desc = "Set location list" })
+  vim.keymap.set("n", "gD", function() return vim.lsp.buf.declaration() end, { silent = true, buffer = bufnr, desc = "Go to declaration" })
+  vim.keymap.set("n", "gd", function() return vim.lsp.buf.definition() end, { silent = true, buffer = bufnr, desc = "Go to definition" })
+  vim.keymap.set("n", "gh", function() return vim.lsp.buf.hover() end, { silent = true, buffer = bufnr, desc = "Hover" })
+  vim.keymap.set("n", "gl", function() return vim.lsp.buf.implementation() end, { silent = true, buffer = bufnr, desc = "Go to implementation" })
+  vim.keymap.set("n", "gH", function() return vim.lsp.buf.signature_help() end, { silent = true, buffer = bufnr, desc = "Signature help" })
+  vim.keymap.set("n", "gs", function() return vim.lsp.buf.document_symbol() end, { silent = true, buffer = bufnr, desc = "Document symbol" })
+  vim.keymap.set("n", "gS", function() return vim.lsp.buf.workspace_symbol() end, { silent = true, buffer = bufnr, desc = "Workspace symbol" })
+  vim.keymap.set("n", "gwa", function() return vim.lsp.buf.add_workspace_folder() end, { silent = true, buffer = bufnr, desc = "Add workspace folder" })
+  vim.keymap.set("n", "gwr", function() return vim.lsp.buf.remove_workspace_folder() end, { silent = true, buffer = bufnr, desc = "Remove workspace folder" })
+  vim.keymap.set("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { silent = true, buffer = bufnr, desc = "List workspace folders" })
+  vim.keymap.set("n", "gy", function() return vim.lsp.buf.type_definition() end, { silent = true, buffer = bufnr, desc = "Go to type definition" })
+  vim.keymap.set("n", "gm", function() return vim.lsp.buf.rename() end, { silent = true, buffer = bufnr, desc = "Rename" })
+  vim.keymap.set("n", "ga", function() return vim.lsp.buf.code_action() end, { silent = true, buffer = bufnr, desc = "Code action" })
+  vim.keymap.set("n", "gr", function() return vim.lsp.buf.references() end, { silent = true, buffer = bufnr, desc = "References" })
 
   if client.server_capabilities.document_range_formatting then
-    vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   elseif client.server_capabilities.document_formatting then
-    bmap(bufnr, 'n', 'Q', '<Cmd>lua vim.lsp.buf.formatting()<CR>')
+    vim.keymap.set("n", "Q", function() return vim.lsp.buf.formatting() end, { silent = true, buffer = bufnr, desc = "Format buffer" })
   end
 
-  local present0 = pcall(require, "lsp_signature")
-  if present0 then
-    require("lsp_signature").on_attach(signature)
-  end
+  require("lsp_signature").on_attach(signature)
 
-  local present1 = pcall(require, "goto-preview")
-  if present1 then
-    bmap(bufnr, 'n', 'gd', '<Cmd>lua require("goto-preview").goto_preview_definition()<CR>')
-  end
-
-  local present2 = pcall(require, "nvim-navic")
-  if present2 then
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, bufnr)
-    end
+  if client.server_capabilities.documentSymbolProvider then
+    require("nvim-navic").attach(client, bufnr)
   end
 end
 
@@ -76,14 +63,7 @@ vim.diagnostic.config({
   },
 })
 
-local lspconfig_window = require("lspconfig.ui.windows")
-local old_defaults = lspconfig_window.default_opts
-
-function lspconfig_window.default_opts(opts)
-  local win_opts = old_defaults(opts)
-  win_opts.border = "rounded"
-  return win_opts
-end
+require("lspconfig.ui.windows").default_options.border = "rounded"
 
 vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(vim.lsp.handlers.hover, {
@@ -98,17 +78,15 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+local cmp_lsp = require("cmp_nvim_lsp").default_capabilities()
+local extend_cap = vim.tbl_deep_extend("keep", capabilities, cmp_lsp)
 
 local default = {
   on_attach = on_attach,
-  capabilities = capabilities,
-  flags = {
-    -- This will be the default in neovim 0.7+
-    debounce_text_changes = 150,
-  },
+  capabilities = extend_cap,
 }
 
-local path = vim.fn.stdpath "config" .. "/lua/configs/lsp_servers/"
+local path = vim.fn.stdpath("config") .. "/lua/configs/lsp_servers/"
 local files = vim.fn.readdir(path, function(name)
   if string.match(name, ".+%.lua$") then
     return true
@@ -117,15 +95,9 @@ local files = vim.fn.readdir(path, function(name)
 end)
 local servers = vim.tbl_map(function(file) return string.sub(file, 1, -5) end, files)
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
+-- Call setup() on each server
 for _, lsp in pairs(servers) do
   local conf = require(string.format("configs.lsp_servers.%s", lsp))
   conf = vim.tbl_deep_extend("force", default, conf)
-  local present2 = pcall(require, "cmp_nvim_lsp")
-  if present2 then
-    local defcap = require('cmp_nvim_lsp').default_capabilities()
-    conf = vim.tbl_deep_extend("force", conf, { capabilities = defcap })
-  end
   require('lspconfig')[lsp].setup(conf)
 end

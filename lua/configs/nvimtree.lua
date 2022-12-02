@@ -1,5 +1,3 @@
-local map = require("utils").map
-
 local default = {
   create_in_closed_folder = true,
   disable_netrw = true,
@@ -33,6 +31,6 @@ local default = {
   },
 }
 
-require'nvim-tree'.setup(default)
+require("nvim-tree").setup(default)
 
-map("n", "<Leader>e", "<Cmd>lua require('nvim-tree').toggle()<CR>")
+vim.keymap.set("n", "<Leader>e", function() return require('nvim-tree').toggle() end)

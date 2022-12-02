@@ -1,22 +1,11 @@
-if vim.g.paq_bootstrap then
-  local present = pcall(require, "plenary")
-
-  if not present then
-    vim.notify("Please rerun gitsigns hook or just restart nvim.", vim.log.levels.WARN)
-    package.loaded['configs.gitsigns'] = nil
-    return
-  end
-end
-
-local bmap = require("utils").bmap
-
 local default = {
   signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = { hl = "GitSignsAdd"   , text = "│", numhl="GitSignsAddNr"   , linehl="GitSignsAddLn"    },
+    change       = { hl = "GitSignsChange", text = "│", numhl="GitSignsChangeNr", linehl="GitSignsChangeLn" },
+    delete       = { hl = "GitSignsDelete", text = "_", numhl="GitSignsDeleteNr", linehl="GitSignsDeleteLn" },
+    topdelete    = { hl = "GitSignsDelete", text = "‾", numhl="GitSignsDeleteNr", linehl="GitSignsDeleteLn" },
+    changedelete = { hl = "GitSignsChange", text = "~", numhl="GitSignsChangeNr", linehl="GitSignsChangeLn" },
+    untracked    = { hl = "GitSignsAdd"   , text = "┆", numhl="GitSignsAddNr"   , linehl="GitSignsAddLn"    },
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -30,20 +19,20 @@ local default = {
   current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    virt_text_pos = "eol", -- "eol" | "overlay" | "right_align"
     delay = 1000,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
-  max_file_length = 40000,
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
   preview_config = {
     -- Options passed to nvim_open_win
-    border = 'rounded',
-    style = 'minimal',
-    relative = 'cursor',
+    border = "rounded",
+    style = "minimal",
+    relative = "cursor",
     row = 0,
     col = 1
   },
@@ -51,27 +40,42 @@ local default = {
     enable = false
   },
   on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
     -- Navigation
-    bmap(bufnr, 'n', ']c', "&diff ? ']c' : '<Cmd>Gitsigns next_hunk<CR>'", { expr = true })
-    bmap(bufnr, 'n', '[c', "&diff ? '[c' : '<Cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+    map("n", "]c", function()
+      if vim.wo.diff then return "]c" end
+      vim.schedule(function() gs.next_hunk() end)
+      return "<Ignore>"
+    end, { expr=true })
+
+    map("n", "[c", function()
+      if vim.wo.diff then return "[c" end
+      vim.schedule(function() gs.prev_hunk() end)
+      return "<Ignore>"
+    end, { expr=true })
+
     -- Actions
-    bmap(bufnr, 'n', '<Leader>hs', ':Gitsigns stage_hunk<CR>')
-    bmap(bufnr, 'v', '<Leader>hs', ':Gitsigns stage_hunk<CR>')
-    bmap(bufnr, 'n', '<Leader>hr', ':Gitsigns reset_hunk<CR>')
-    bmap(bufnr, 'v', '<Leader>hr', ':Gitsigns reset_hunk<CR>')
-    bmap(bufnr, 'n', '<Leader>hS', '<Cmd>Gitsigns stage_buffer<CR>')
-    bmap(bufnr, 'n', '<Leader>hu', '<Cmd>Gitsigns undo_stage_hunk<CR>')
-    bmap(bufnr, 'n', '<Leader>hR', '<Cmd>Gitsigns reset_buffer<CR>')
-    bmap(bufnr, 'n', '<Leader>hp', '<Cmd>Gitsigns preview_hunk<CR>')
-    bmap(bufnr, 'n', '<Leader>hb', '<Cmd>lua require("gitsigns").blame_line{ full = true }<CR>')
-    bmap(bufnr, 'n', '<Leader>tb', '<Cmd>Gitsigns toggle_current_line_blame<CR>')
-    bmap(bufnr, 'n', '<Leader>hd', '<Cmd>Gitsigns diffthis<CR>')
-    bmap(bufnr, 'n', '<Leader>hD', '<Cmd>lua require("gitsigns").diffthis("~")<CR>')
-    bmap(bufnr, 'n', '<Leader>td', '<Cmd>Gitsigns toggle_deleted<CR>')
+    map({"n", "v"}, "<leader>hs", "<Cmd>Gitsigns stage_hunk<CR>")
+    map({"n", "v"}, "<leader>hr", "<Cmd>Gitsigns reset_hunk<CR>")
+    map("n", "<leader>hS", gs.stage_buffer)
+    map("n", "<leader>hu", gs.undo_stage_hunk)
+    map("n", "<leader>hR", gs.reset_buffer)
+    map("n", "<leader>hp", gs.preview_hunk)
+    map("n", "<leader>hb", function() gs.blame_line{ full=true } end)
+    map("n", "<leader>tb", gs.toggle_current_line_blame)
+    map("n", "<leader>hd", gs.diffthis)
+    map("n", "<leader>hD", function() gs.diffthis("~") end)
+    map("n", "<leader>td", gs.toggle_deleted)
 
     -- Text object
-    bmap(bufnr, 'o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-    bmap(bufnr, 'x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
   end,
 }
 
