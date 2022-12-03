@@ -174,7 +174,10 @@ local plugins = {
     end,
   },
   {
-    "machakann/vim-sandwich",
+    "kylechui/nvim-surround",
+    function()
+      require("nvim-surround").setup()
+    end,
   },
   {
     "mbbill/undotree",
