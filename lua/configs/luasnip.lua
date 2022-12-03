@@ -1,6 +1,7 @@
+local luasnip = require("luasnip")
 local types = require("luasnip.util.types")
 
-require("luasnip").config.setup({
+luasnip.config.setup({
   ext_opts = {
     [types.choiceNode] = {
       active = {
@@ -15,7 +16,34 @@ require("luasnip").config.setup({
   },
 })
 
-vim.keymap.set("i", "<Tab>", "v:lua.luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'", { expr = true })
-vim.keymap.set("i", "<S-Tab>", "v:lua.luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'", { expr = true })
-vim.keymap.set({"i", "s"}, "<C-j>", "v:lua.luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-j>'", { expr = true })
-vim.keymap.set({"i", "s"}, "<C-k>", "v:lua.luasnip#choice_active() ? '<Plug>luasnip-prev-choice' : '<C-k>'", { expr = true })
+vim.keymap.set({"i", "s"}, "<Tab>", function()
+  if luasnip.expand_or_jumpable() then
+    return luasnip.expand_or_jump()
+  else
+    return "<Tab>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({"i", "s"}, "<S-Tab>", function()
+  if luasnip.jumpable(-1) then
+    return luasnip.jump(-1)
+  else
+    return "<S-Tab>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({"i", "s"}, "<C-j>", function()
+  if luasnip.choice_active() then
+    return luasnip.next_choice()
+  else
+    return "<C-j>"
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({"i", "s"}, "<C-k>", function()
+  if luasnip.choice_active() then
+    return luasnip.prev_choice()
+  else
+    return "<C-k>"
+  end
+end, { silent = true, expr = true })
