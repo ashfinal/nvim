@@ -14,7 +14,7 @@ local signature = {
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "ge", function() return vim.diagnostic.open_float() end, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
-  vim.keymap.set("n", "gE", function() return vim.diagnostic.open_float({scope = 'buffer'}) end, { silent = true, buffer = bufnr, desc = "Show buffer diagnostics" })
+  vim.keymap.set("n", "gE", function() return vim.diagnostic.open_float({ scope = "buffer" }) end, { silent = true, buffer = bufnr, desc = "Show buffer diagnostics" })
   vim.keymap.set("n", "[d", function() return vim.diagnostic.goto_prev() end, { silent = true, buffer = bufnr, desc = "Go to previous diagnostic" })
   vim.keymap.set("n", "]d", function() return vim.diagnostic.goto_next() end, { silent = true, buffer = bufnr, desc = "Go to next diagnostic" })
   vim.keymap.set("n", "gL", function() return vim.diagnostic.setloclist() end, { silent = true, buffer = bufnr, desc = "Set location list" })

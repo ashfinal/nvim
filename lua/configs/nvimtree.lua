@@ -33,4 +33,4 @@ local default = {
 
 require("nvim-tree").setup(default)
 
-vim.keymap.set("n", "<Leader>e", function() return require('nvim-tree').toggle() end)
+vim.keymap.set("n", "<Leader>e", function() return require('nvim-tree').toggle() end, { desc = "Toggle file explorer" })

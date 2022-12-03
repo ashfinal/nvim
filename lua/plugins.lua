@@ -5,7 +5,6 @@ if not present then
 end
 
 local plugins = {
-  "chiyadev/dep",
   {
     "andymass/vim-matchup",
     setup = function()
