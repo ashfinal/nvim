@@ -21,7 +21,7 @@ local default = {
     theme = "auto",
     component_separators = "",
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "NvimTree" },
+    disabled_filetypes = {},
     always_divide_middle = true,
   },
   sections = {
