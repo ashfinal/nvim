@@ -16,7 +16,6 @@ local default = {
     show_tab_indicators = true,
     separator_style = "thin",
     enforce_regular_tabs = false,
-    view = "multiwindow",
     buffer_close_icon = "",
     modified_icon = "",
     close_icon = "",
@@ -31,18 +30,18 @@ local default = {
       {
         filetype = "NvimTree",
         text = "",
-        padding = 1,
         text_align = "left",
+        separator = true,
       },
       {
         filetype = "undotree",
         text = "",
-        padding = 1,
+        separator = true,
       },
       {
         filetype = "DiffviewFiles",
         text = "",
-        padding = 1,
+        separator = true,
       },
     },
   }

@@ -29,6 +29,13 @@ local default = {
   renderer = {
     highlight_opened_files = "all",
   },
+  actions = {
+    file_popup = {
+      open_win_config = {
+        border = "single",
+      },
+    },
+  },
 }
 
 require("nvim-tree").setup(default)
