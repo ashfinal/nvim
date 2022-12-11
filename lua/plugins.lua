@@ -104,7 +104,7 @@ local plugins = {
     function()
       require("configs.treesitter")
     end,
-    deps = { "SmiteshP/nvim-navic", "windwp/nvim-ts-autotag", "windwp/nvim-autopairs" },
+    deps = { "SmiteshP/nvim-navic", "windwp/nvim-ts-autotag", "windwp/nvim-autopairs", "JoosepAlviste/nvim-ts-context-commentstring" },
   },
   {
     "SmiteshP/nvim-navic",
@@ -136,6 +136,7 @@ local plugins = {
     function()
       require("configs.comment")
     end,
+    requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
   },
   {
     "kyazdani42/nvim-tree.lua",

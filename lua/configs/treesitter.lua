@@ -24,6 +24,10 @@ local default = {
     enable = true,
     disable_virtual_text = false,
   },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
