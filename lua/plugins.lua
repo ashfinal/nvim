@@ -104,13 +104,21 @@ local plugins = {
     function()
       require("configs.treesitter")
     end,
-    deps = { "SmiteshP/nvim-navic", "windwp/nvim-ts-autotag", "windwp/nvim-autopairs", "JoosepAlviste/nvim-ts-context-commentstring" },
+    deps = { "windwp/nvim-ts-autotag", "windwp/nvim-autopairs", "JoosepAlviste/nvim-ts-context-commentstring" },
   },
   {
     "SmiteshP/nvim-navic",
     function()
       require("configs.nvim-navic")
     end,
+    requires = { "nvim-treesitter/nvim-treesitter" },
+  },
+  {
+    "Wansmer/treesj",
+    function()
+      require("configs.treesj")
+    end,
+    requires = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "lukas-reineke/indent-blankline.nvim",
