@@ -1,5 +1,4 @@
 local default = {
-  create_in_closed_folder = true,
   disable_netrw = true,
   hijack_netrw = true,
   ignore_ft_on_setup = { "dashboard" },
