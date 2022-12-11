@@ -31,12 +31,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "ga", function() return vim.lsp.buf.code_action() end, { silent = true, buffer = bufnr, desc = "Code action" })
   vim.keymap.set("n", "gr", function() return vim.lsp.buf.references() end, { silent = true, buffer = bufnr, desc = "References" })
 
-  if client.server_capabilities.document_range_formatting then
-    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  elseif client.server_capabilities.document_formatting then
-    vim.keymap.set("n", "Q", function() return vim.lsp.buf.formatting() end, { silent = true, buffer = bufnr, desc = "Format buffer" })
-  end
-
   require("lsp_signature").on_attach(signature)
 
   if client.server_capabilities.documentSymbolProvider then
