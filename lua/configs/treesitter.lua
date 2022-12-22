@@ -40,15 +40,12 @@ local default = {
       scope_incremental = "+",
       node_decremental = "-",
     },
+    is_supported = function()
+      local ct = vim.fn.getcmdwintype()
+      if ct ~= "" then return false end
+      return true
+    end,
   },
 }
 
 require("nvim-treesitter.configs").setup(default)
-
-vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
-vim.api.nvim_create_autocmd("CmdwinEnter", {
-  pattern = "*",
-  command = "TSBufDisable incremental_selection",
-  group = "cmdwin_treesitter",
-  desc = "Disable treesitter's incremental selection in Command-line window",
-})
