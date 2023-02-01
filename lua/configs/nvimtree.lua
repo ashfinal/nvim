@@ -1,7 +1,6 @@
 local default = {
   disable_netrw = true,
   hijack_netrw = true,
-  ignore_ft_on_setup = { "dashboard" },
   auto_reload_on_write = true,
   hijack_cursor = true,
   update_cwd = true,
