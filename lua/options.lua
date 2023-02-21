@@ -3,7 +3,7 @@ local g = vim.g
 
 opt.title = true
 opt.titlestring = '%(%m%)%(%{expand(\"%:~\")}%)'
-opt.mouse = "a"
+opt.mousemodel = "extend"
 opt.cmdheight = 1
 opt.pumheight = 10
 opt.number = true
