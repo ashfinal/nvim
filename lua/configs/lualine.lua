@@ -14,6 +14,8 @@ local function diff_source()
   end
 end
 
+local navic = require("nvim-navic")
+
 local default = {
   options = {
     globalstatus = true,
@@ -27,7 +29,16 @@ local default = {
   sections = {
     lualine_a = { "fileformat" },
     lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
-    lualine_c = { "filename", { dirname } },
+    lualine_c = { "filename", { dirname },
+      {
+        function()
+          return navic.get_location()
+        end,
+        cond = function()
+          return navic.is_available()
+        end
+      }
+    },
     lualine_x = { "encoding" },
     lualine_y = { "progress" },
     lualine_z = { "location" }
@@ -43,8 +54,5 @@ local default = {
   tabline = {},
   extensions = {}
 }
-
-local navic = require("nvim-navic")
-default["sections"]["lualine_c"][3] = { navic.get_location, cond = navic.is_available }
 
 require("lualine").setup(default)
