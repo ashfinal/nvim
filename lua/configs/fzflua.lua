@@ -15,7 +15,7 @@ vim.keymap.set("n", "<Leader>fo", function() return require("fzf-lua").oldfiles(
 vim.keymap.set("n", "<Leader>ft", function() return require("fzf-lua").grep_project() end, { silent = true, desc = "Fuzzy find text in project" })
 vim.keymap.set("n", "<Leader>jj", function() return require("fzf-lua").jumps() end, { silent = true, desc = "Fuzzy find jumps" })
 vim.keymap.set("n", "<Leader>mm", function() return require("fzf-lua").marks() end, { silent = true, desc = "Fuzzy find marks" })
-vim.keymap.set("n", "<Leader>fw", function() return require("fzf-lua").live_grep_native() end, { silent = true, desc = "Live grep" })
+vim.keymap.set("n", "<Leader>fw", function() return require("fzf-lua").grep_cword() end, { silent = true, desc = "Search word under cursor" })
 vim.keymap.set("n", "<Leader>fm", function() return require("fzf-lua").git_commits() end, { silent = true, desc = "Fuzzy find git commits" })
 vim.keymap.set("n", "<Leader>bm", function() return require("fzf-lua").git_bcommits() end, { silent = true, desc = "Fuzzy find git bcommits" })
 vim.keymap.set("n", "<Leader>go", function() return require("fzf-lua").lsp_document_symbols() end, { silent = true, desc = "Fuzzy find lsp document symbols" })

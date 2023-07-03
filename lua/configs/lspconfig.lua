@@ -13,16 +13,13 @@ local signature = {
 
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set("n", "ge", function() return vim.diagnostic.open_float() end, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
-  vim.keymap.set("n", "gE", function() return vim.diagnostic.open_float({ scope = "buffer" }) end, { silent = true, buffer = bufnr, desc = "Show buffer diagnostics" })
+  vim.keymap.set("n", "gs", function() return vim.diagnostic.setqflist() end, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
   vim.keymap.set("n", "[d", function() return vim.diagnostic.goto_prev() end, { silent = true, buffer = bufnr, desc = "Go to previous diagnostic" })
   vim.keymap.set("n", "]d", function() return vim.diagnostic.goto_next() end, { silent = true, buffer = bufnr, desc = "Go to next diagnostic" })
-  vim.keymap.set("n", "gL", function() return vim.diagnostic.setloclist() end, { silent = true, buffer = bufnr, desc = "Set location list" })
   vim.keymap.set("n", "gD", function() return vim.lsp.buf.declaration() end, { silent = true, buffer = bufnr, desc = "Go to declaration" })
   vim.keymap.set("n", "gd", function() return vim.lsp.buf.definition() end, { silent = true, buffer = bufnr, desc = "Go to definition" })
-  vim.keymap.set("n", "gh", function() return vim.lsp.buf.hover() end, { silent = true, buffer = bufnr, desc = "Hover" })
+  vim.keymap.set("n", "K", function() return vim.lsp.buf.hover() end, { silent = true, buffer = bufnr, desc = "Hover" })
   vim.keymap.set("n", "gl", function() return vim.lsp.buf.implementation() end, { silent = true, buffer = bufnr, desc = "Go to implementation" })
-  vim.keymap.set("n", "gH", function() return vim.lsp.buf.signature_help() end, { silent = true, buffer = bufnr, desc = "Signature help" })
   vim.keymap.set("n", "gwa", function() return vim.lsp.buf.add_workspace_folder() end, { silent = true, buffer = bufnr, desc = "Add workspace folder" })
   vim.keymap.set("n", "gwr", function() return vim.lsp.buf.remove_workspace_folder() end, { silent = true, buffer = bufnr, desc = "Remove workspace folder" })
   vim.keymap.set("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { silent = true, buffer = bufnr, desc = "List workspace folders" })
