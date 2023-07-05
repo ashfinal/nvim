@@ -26,6 +26,12 @@ local default = {
   },
   renderer = {
     highlight_opened_files = "all",
+    icons = {
+      git_placement = "after",
+      show = {
+        file = true,
+      },
+    },
   },
   actions = {
     file_popup = {
