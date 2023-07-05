@@ -151,6 +151,7 @@ local plugins = {
     function()
       require("configs.nvimtree")
     end,
+    requires = { "kyazdani42/nvim-web-devicons" },
   },
   {
     "kevinhwang91/nvim-bqf",
