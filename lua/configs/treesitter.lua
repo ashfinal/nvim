@@ -8,6 +8,8 @@ local default = {
     "javascript",
     "latex",
     "lua",
+    "markdown",
+    "markdown_inline",
     "python",
     "query",
     "rst",
