@@ -38,3 +38,11 @@ vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
   group = "autostop_lspserver",
   desc = "Detach LSP client when buffer is deleted and stop server if no buffers are attached",
 })
+
+vim.api.nvim_create_augroup("highlight_yanked_text", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  pattern = "*",
+  callback = function() vim.highlight.on_yank() end,
+  group = "highlight_yanked_text",
+  desc = "Briefly highlight yanked text"
+})
