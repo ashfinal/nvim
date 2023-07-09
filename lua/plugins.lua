@@ -23,7 +23,7 @@ local plugins = {
     function()
       require("configs.bufferline")
     end,
-    requires = { "kyazdani42/nvim-web-devicons" }
+    requires = { "kyazdani42/nvim-web-devicons" },
   },
   {
     "famiu/bufdelete.nvim",
@@ -83,6 +83,7 @@ local plugins = {
     function()
       require("configs.nvim-cmp")
     end,
+    requires = { "L3MON4D3/LuaSnip" },
     deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp" },
   },
   {
@@ -90,7 +91,7 @@ local plugins = {
     function()
       require("configs.lspconfig")
     end,
-    requires = { "ray-x/lsp_signature.nvim", "b0o/schemastore.nvim", "SmiteshP/nvim-navic" },
+    requires = { "ray-x/lsp_signature.nvim", "b0o/schemastore.nvim", "SmiteshP/nvim-navic", "hrsh7th/cmp-nvim-lsp" },
     deps = { "j-hui/fidget.nvim" },
   },
   {
