@@ -70,13 +70,20 @@ local plugins = {
     end,
   },
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     function()
-      vim.keymap.set("i", "<C-.>", "copilot#Accept('<CR>')", { silent = true, expr = true, script = true })
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end,
-    setup = function()
-      vim.g.copilot_no_tab_map = true
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    function()
+      require("copilot_cmp").setup()
     end,
+    requires = { "zbirenbaum/copilot.lua", "hrsh7th/nvim-cmp" }
   },
   {
     "hrsh7th/nvim-cmp",
@@ -84,7 +91,7 @@ local plugins = {
       require("configs.nvim-cmp")
     end,
     requires = { "L3MON4D3/LuaSnip" },
-    deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp" },
+    deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp", "zbirenbaum/copilot-cmp" },
   },
   {
     "neovim/nvim-lspconfig",

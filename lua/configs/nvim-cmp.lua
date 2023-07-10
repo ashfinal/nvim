@@ -25,7 +25,8 @@ local kind_icons = {
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = ""
+  TypeParameter = "",
+  Copilot = "",
 }
 
 vim.opt.completeopt = "menuone,noselect"
@@ -63,6 +64,7 @@ local default = {
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
         latex_symbols = "[LaTeX]",
+        copilot = "[Copilot]",
       })[entry.source.name]
       return vim_item
     end
@@ -104,6 +106,7 @@ local default = {
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
   },
   sources = cmp.config.sources({
+    { name = "copilot" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "path" },
