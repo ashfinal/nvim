@@ -84,14 +84,14 @@ local plugins = {
     function()
       require("copilot_cmp").setup()
     end,
-    requires = { "zbirenbaum/copilot.lua", "hrsh7th/nvim-cmp" }
+    requires = { "zbirenbaum/copilot.lua" }
   },
   {
     "hrsh7th/nvim-cmp",
     function()
       require("configs.nvim-cmp")
     end,
-    requires = { "L3MON4D3/LuaSnip" },
+    requires = { "L3MON4D3/LuaSnip", "zbirenbaum/copilot.lua" },
     deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp", "zbirenbaum/copilot-cmp" },
   },
   {
