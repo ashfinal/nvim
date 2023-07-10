@@ -120,7 +120,6 @@ local plugins = {
     function()
       require("configs.nvim-navic")
     end,
-    requires = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "Wansmer/treesj",
