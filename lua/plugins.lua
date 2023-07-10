@@ -49,6 +49,7 @@ local plugins = {
     function()
       require("configs.fzflua")
     end,
+    requires = { "kyazdani42/nvim-web-devicons" },
   },
   {
     "lewis6991/gitsigns.nvim",
