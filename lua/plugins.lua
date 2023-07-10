@@ -23,7 +23,7 @@ local plugins = {
     function()
       require("configs.bufferline")
     end,
-    requires = { "kyazdani42/nvim-web-devicons" },
+    requires = { "kyazdani42/nvim-web-devicons", "famiu/bufdelete.nvim" },
   },
   {
     "famiu/bufdelete.nvim",
