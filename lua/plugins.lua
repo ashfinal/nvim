@@ -4,6 +4,8 @@ if not present then
   return false
 end
 
+-- Deps means would have been totally useless otherwise, requires means (better) load them before.
+
 local plugins = {
   {
     "andymass/vim-matchup",
@@ -62,13 +64,13 @@ local plugins = {
     function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
-    requires = { "L3MON4D3/LuaSnip" }
   },
   {
     "L3MON4D3/LuaSnip",
     function()
       require("configs.luasnip")
     end,
+    deps = { "rafamadriz/friendly-snippets", "saadparwaiz1/cmp_luasnip" },
   },
   {
     "zbirenbaum/copilot.lua",
@@ -78,6 +80,7 @@ local plugins = {
         panel = { enabled = false },
       })
     end,
+    deps = { "zbirenbaum/copilot-cmp" }
   },
   {
     "zbirenbaum/copilot-cmp",
@@ -113,7 +116,7 @@ local plugins = {
     function()
       require("configs.treesitter")
     end,
-    deps = { "windwp/nvim-ts-autotag", "windwp/nvim-autopairs", "JoosepAlviste/nvim-ts-context-commentstring" },
+    deps = { "windwp/nvim-ts-autotag", "windwp/nvim-autopairs", "JoosepAlviste/nvim-ts-context-commentstring", "Wansmer/treesj" },
   },
   {
     "SmiteshP/nvim-navic",
@@ -126,7 +129,6 @@ local plugins = {
     function()
       require("configs.treesj")
     end,
-    requires = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "lukas-reineke/indent-blankline.nvim",
