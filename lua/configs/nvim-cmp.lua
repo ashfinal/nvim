@@ -123,7 +123,6 @@ local default = {
         end,
       },
     },
-    { name = "cmdline" },
   })
 }
 
