@@ -16,22 +16,6 @@ luasnip.config.setup({
   },
 })
 
-vim.keymap.set({"i", "s"}, "<Tab>", function()
-  if luasnip.expand_or_jumpable() then
-    return luasnip.expand_or_jump()
-  else
-    return "<Tab>"
-  end
-end, { silent = true, expr = true })
-
-vim.keymap.set({"i", "s"}, "<S-Tab>", function()
-  if luasnip.jumpable(-1) then
-    return luasnip.jump(-1)
-  else
-    return "<S-Tab>"
-  end
-end, { silent = true, expr = true })
-
 vim.keymap.set({"i", "s"}, "<C-j>", function()
   if luasnip.choice_active() then
     return luasnip.next_choice()

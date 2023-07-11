@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 local kind_icons = {
   Text = "",
@@ -101,6 +102,22 @@ local default = {
         fallback()
       end
     end, { "i", "c" }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() and cmp.get_active_entry() then
+        cmp.confirm({ select = false })
+      elseif luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
   },
