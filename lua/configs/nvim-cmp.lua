@@ -36,6 +36,7 @@ local default = {
     if vim.tbl_contains({ "TelescopePrompt" }, vim.o.ft) then
       return false
     end
+    return true
   end,
 
   snippet = {
@@ -81,19 +82,15 @@ local default = {
       else
         fallback()
       end
-    end, { "i", "s", "c" }),
+    end, { "i", "c" }),
     ["<C-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
         fallback()
       end
-    end, { "i", "s", "c" }),
-    ["<C-e>"] = cmp.mapping(function(fallback)
-      cmp.close()
-      fallback()
     end, { "i", "c" }),
-    ["<C-y>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
+    ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
   },
   sources = cmp.config.sources({
@@ -120,14 +117,12 @@ local default = {
 cmp.setup(default)
 
 cmp.setup.cmdline({ "/", "?" }, {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" }
   }
 })
 
 cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
     { name = "cmdline" },
