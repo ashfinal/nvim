@@ -31,11 +31,22 @@ local kind_icons = {
 
 vim.opt.completeopt = "menuone,noselect"
 
+local function bufIsBig()
+  local max_filesize = 200 * 1024 -- 200 KB
+  local ok, stats = pcall(vim.loop.fs_stat, vim.fn.expand("%:p"))
+  if ok and stats and stats.size > max_filesize then
+    return true
+  else
+    return false
+  end
+end
+
 local default = {
   enabled = function()
     if vim.tbl_contains({ "TelescopePrompt" }, vim.o.ft) then
       return false
     end
+    if bufIsBig() then return false end
     return true
   end,
 
