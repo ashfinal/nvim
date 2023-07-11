@@ -13,20 +13,20 @@ local signature = {
 
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set("n", "gs", function() return vim.diagnostic.setqflist() end, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
-  vim.keymap.set("n", "[d", function() return vim.diagnostic.goto_prev() end, { silent = true, buffer = bufnr, desc = "Go to previous diagnostic" })
-  vim.keymap.set("n", "]d", function() return vim.diagnostic.goto_next() end, { silent = true, buffer = bufnr, desc = "Go to next diagnostic" })
-  vim.keymap.set("n", "gD", function() return vim.lsp.buf.declaration() end, { silent = true, buffer = bufnr, desc = "Go to declaration" })
-  vim.keymap.set("n", "gd", function() return vim.lsp.buf.definition() end, { silent = true, buffer = bufnr, desc = "Go to definition" })
-  vim.keymap.set("n", "K", function() return vim.lsp.buf.hover() end, { silent = true, buffer = bufnr, desc = "Hover" })
-  vim.keymap.set("n", "gl", function() return vim.lsp.buf.implementation() end, { silent = true, buffer = bufnr, desc = "Go to implementation" })
-  vim.keymap.set("n", "gwa", function() return vim.lsp.buf.add_workspace_folder() end, { silent = true, buffer = bufnr, desc = "Add workspace folder" })
-  vim.keymap.set("n", "gwr", function() return vim.lsp.buf.remove_workspace_folder() end, { silent = true, buffer = bufnr, desc = "Remove workspace folder" })
+  vim.keymap.set("n", "gs", vim.diagnostic.setqflist, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true, buffer = bufnr, desc = "Go to previous diagnostic" })
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true, buffer = bufnr, desc = "Go to next diagnostic" })
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = bufnr, desc = "Go to declaration" })
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true, buffer = bufnr, desc = "Go to definition" })
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = bufnr, desc = "Hover" })
+  vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { silent = true, buffer = bufnr, desc = "Go to implementation" })
+  vim.keymap.set("n", "gwa", vim.lsp.buf.add_workspace_folder, { silent = true, buffer = bufnr, desc = "Add workspace folder" })
+  vim.keymap.set("n", "gwr", vim.lsp.buf.remove_workspace_folder, { silent = true, buffer = bufnr, desc = "Remove workspace folder" })
   vim.keymap.set("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { silent = true, buffer = bufnr, desc = "List workspace folders" })
-  vim.keymap.set("n", "gy", function() return vim.lsp.buf.type_definition() end, { silent = true, buffer = bufnr, desc = "Go to type definition" })
-  vim.keymap.set("n", "gm", function() return vim.lsp.buf.rename() end, { silent = true, buffer = bufnr, desc = "Rename" })
-  vim.keymap.set("n", "ga", function() return vim.lsp.buf.code_action() end, { silent = true, buffer = bufnr, desc = "Code action" })
-  vim.keymap.set("n", "gr", function() return vim.lsp.buf.references() end, { silent = true, buffer = bufnr, desc = "References" })
+  vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { silent = true, buffer = bufnr, desc = "Go to type definition" })
+  vim.keymap.set("n", "gm", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "Rename" })
+  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "Code action" })
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = bufnr, desc = "References" })
 
   require("lsp_signature").on_attach(signature)
 
@@ -65,14 +65,11 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
   })
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-local cmp_lsp = require("cmp_nvim_lsp").default_capabilities()
-local extend_cap = vim.tbl_deep_extend("keep", capabilities, cmp_lsp)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local default = {
   on_attach = on_attach,
-  capabilities = extend_cap,
+  capabilities = capabilities,
 }
 
 local path = vim.fn.stdpath("config") .. "/lua/configs/lsp_servers/"
