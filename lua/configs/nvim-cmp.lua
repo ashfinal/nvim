@@ -6,8 +6,8 @@ local kind_icons = {
   Method = "",
   Function = "",
   Constructor = "",
-  Field = "",
-  Variable = "",
+  Field = "",
+  Variable = "󰀫",
   Class = "ﴯ",
   Interface = "",
   Module = "",
@@ -26,7 +26,7 @@ local kind_icons = {
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = "",
+  TypeParameter = "󰊄",
   Copilot = "",
 }
 
