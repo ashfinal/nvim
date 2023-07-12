@@ -17,3 +17,4 @@ local default = {
 }
 
 require("indent_blankline").setup(default)
+vim.cmd("hi! link WinSeparator IndentBlanklineContextChar")
