@@ -102,7 +102,7 @@ local plugins = {
     function()
       require("configs.lspconfig")
     end,
-    requires = { "b0o/schemastore.nvim", "SmiteshP/nvim-navic", "hrsh7th/cmp-nvim-lsp" },
+    requires = { "b0o/schemastore.nvim", "hrsh7th/cmp-nvim-lsp" },
     deps = { "j-hui/fidget.nvim" },
   },
   {
