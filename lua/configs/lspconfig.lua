@@ -11,29 +11,29 @@ local signature = {
   }
 }
 
-local on_attach = function(client, bufnr)
+local user_lspconfig = function(ev)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set("n", "gs", vim.diagnostic.setqflist, { silent = true, buffer = bufnr, desc = "Show diagnostics" })
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true, buffer = bufnr, desc = "Go to previous diagnostic" })
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true, buffer = bufnr, desc = "Go to next diagnostic" })
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = bufnr, desc = "Go to declaration" })
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true, buffer = bufnr, desc = "Go to definition" })
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = bufnr, desc = "Hover" })
-  vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { silent = true, buffer = bufnr, desc = "Go to implementation" })
-  vim.keymap.set("n", "gwa", vim.lsp.buf.add_workspace_folder, { silent = true, buffer = bufnr, desc = "Add workspace folder" })
-  vim.keymap.set("n", "gwr", vim.lsp.buf.remove_workspace_folder, { silent = true, buffer = bufnr, desc = "Remove workspace folder" })
-  vim.keymap.set("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { silent = true, buffer = bufnr, desc = "List workspace folders" })
-  vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { silent = true, buffer = bufnr, desc = "Go to type definition" })
-  vim.keymap.set("n", "gm", vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = "Rename" })
-  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = "Code action" })
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = bufnr, desc = "References" })
-
-  require("lsp_signature").on_attach(signature)
-
-  if client.server_capabilities.documentSymbolProvider then
-    require("nvim-navic").attach(client, bufnr)
-  end
+  vim.keymap.set("n", "gs", vim.diagnostic.setqflist, { silent = true, buffer = ev.buf, desc = "Show diagnostics" })
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true, buffer = ev.buf, desc = "Go to previous diagnostic" })
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true, buffer = ev.buf, desc = "Go to next diagnostic" })
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = ev.buf, desc = "Go to declaration" })
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true, buffer = ev.buf, desc = "Go to definition" })
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = ev.buf, desc = "Hover" })
+  vim.keymap.set("n", "gl", vim.lsp.buf.implementation, { silent = true, buffer = ev.buf, desc = "Go to implementation" })
+  vim.keymap.set("n", "gwa", vim.lsp.buf.add_workspace_folder, { silent = true, buffer = ev.buf, desc = "Add workspace folder" })
+  vim.keymap.set("n", "gwr", vim.lsp.buf.remove_workspace_folder, { silent = true, buffer = ev.buf, desc = "Remove workspace folder" })
+  vim.keymap.set("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { silent = true, buffer = ev.buf, desc = "List workspace folders" })
+  vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { silent = true, buffer = ev.buf, desc = "Go to type definition" })
+  vim.keymap.set("n", "gm", vim.lsp.buf.rename, { silent = true, buffer = ev.buf, desc = "Rename" })
+  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { silent = true, buffer = ev.buf, desc = "Code action" })
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, { silent = true, buffer = ev.buf, desc = "References" })
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = user_lspconfig,
+  desc = "User on_attach lspconfig(mainly buffer related mappings)",
+})
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
