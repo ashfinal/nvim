@@ -75,19 +75,16 @@ local plugins = {
   {
     "zbirenbaum/copilot.lua",
     function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
+      require("configs.copilot")
     end,
-    deps = { "zbirenbaum/copilot-cmp" }
+    deps = { "zbirenbaum/copilot-cmp" },
   },
   {
     "zbirenbaum/copilot-cmp",
     function()
       require("copilot_cmp").setup()
     end,
-    requires = { "zbirenbaum/copilot.lua" }
+    requires = { "zbirenbaum/copilot.lua" },
   },
   {
     "hrsh7th/nvim-cmp",
