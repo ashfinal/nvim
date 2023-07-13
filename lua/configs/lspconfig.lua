@@ -1,16 +1,3 @@
-local signature = {
-  bind = true,
-  doc_lines = 0,
-  hint_enable = false,
-  hint_prefix = " ",
-  hint_scheme = "Comment",
-  floating_window = true,
-  hi_parameter = "PmenuSel",
-  handler_opts = {
-    border = "rounded",
-  }
-}
-
 local user_lspconfig = function(ev)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "gs", vim.diagnostic.setqflist, { silent = true, buffer = ev.buf, desc = "Show diagnostics" })

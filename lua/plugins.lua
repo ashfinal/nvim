@@ -102,8 +102,14 @@ local plugins = {
     function()
       require("configs.lspconfig")
     end,
-    requires = { "ray-x/lsp_signature.nvim", "b0o/schemastore.nvim", "SmiteshP/nvim-navic", "hrsh7th/cmp-nvim-lsp" },
+    requires = { "b0o/schemastore.nvim", "SmiteshP/nvim-navic", "hrsh7th/cmp-nvim-lsp" },
     deps = { "j-hui/fidget.nvim" },
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    function()
+      require("configs.signature")
+    end,
   },
   {
     "j-hui/fidget.nvim",
