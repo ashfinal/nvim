@@ -51,12 +51,15 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
     border = "rounded"
   })
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Add additional capabilities supported by lsp-cmp
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Add additional capabilities supported by copilot-cmp
+local copilot_capabilities = require("copilot_cmp").default_capabilities()
+
+local merged_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, copilot_capabilities)
 
 local default = {
-  on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = merged_capabilities,
 }
 
 local path = vim.fn.stdpath("config") .. "/lua/configs/lsp_servers/"
