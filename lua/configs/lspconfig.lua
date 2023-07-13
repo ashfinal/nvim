@@ -17,7 +17,7 @@ local user_lspconfig = function(ev)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  group = vim.api.nvim_create_augroup("user_lspconfig_on_attach", {}),
   callback = user_lspconfig,
   desc = "User on_attach lspconfig(mainly buffer related mappings)",
 })

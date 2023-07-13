@@ -12,7 +12,7 @@ local default = {
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("LspSignatureConf", {}),
+  group = vim.api.nvim_create_augroup("lsp_signature_conf_on_attach", {}),
   callback = function()
     require("lsp_signature").on_attach(default)
   end,

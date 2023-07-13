@@ -13,11 +13,10 @@ local function reveal_invisible_chars()
   end
 end
 
-vim.api.nvim_create_augroup("reveal_invisible_chars", { clear = true })
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
   pattern = "*",
   callback = reveal_invisible_chars,
-  group = "reveal_invisible_chars",
+  group = vim.api.nvim_create_augroup("reveal_invisible_chars", {}),
   desc = "Check for invisible characters and find inconsistency, reveal them if necessary",
 })
 
@@ -31,18 +30,16 @@ local function try_stopping_lspserver(args)
   end)
 end
 
-vim.api.nvim_create_augroup("autostop_lspserver", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
   pattern = "*",
   callback = try_stopping_lspserver,
-  group = "autostop_lspserver",
+  group = vim.api.nvim_create_augroup("autostop_lspserver", {}),
   desc = "Detach LSP client when buffer is deleted and stop server if no buffers are attached",
 })
 
-vim.api.nvim_create_augroup("highlight_yanked_text", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
   callback = function() vim.highlight.on_yank() end,
-  group = "highlight_yanked_text",
-  desc = "Briefly highlight yanked text"
+  group = vim.api.nvim_create_augroup("highlight_yanked_text", {}),
+  desc = "Briefly highlight yanked text",
 })

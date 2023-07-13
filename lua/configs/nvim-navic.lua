@@ -35,7 +35,7 @@ local default = {
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_navic_conf", {}),
+  group = vim.api.nvim_create_augroup("lsp_navic_conf_on_attach", {}),
   callback = function(ev)
     local bufnr = ev.buf
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
