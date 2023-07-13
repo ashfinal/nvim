@@ -70,7 +70,7 @@ local plugins = {
     function()
       require("configs.luasnip")
     end,
-    deps = { "rafamadriz/friendly-snippets", "saadparwaiz1/cmp_luasnip" },
+    deps = { "rafamadriz/friendly-snippets" },
   },
   {
     "zbirenbaum/copilot.lua",
@@ -95,14 +95,14 @@ local plugins = {
       require("configs.nvim-cmp")
     end,
     requires = { "L3MON4D3/LuaSnip", "zbirenbaum/copilot.lua" },
-    deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp", "zbirenbaum/copilot-cmp" },
+    deps = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lsp" },
   },
   {
     "neovim/nvim-lspconfig",
     function()
       require("configs.lspconfig")
     end,
-    requires = { "b0o/schemastore.nvim", "hrsh7th/cmp-nvim-lsp" },
+    requires = { "b0o/schemastore.nvim", "hrsh7th/cmp-nvim-lsp", "zbirenbaum/copilot-cmp" },
     deps = { "j-hui/fidget.nvim" },
   },
   {
