@@ -44,7 +44,7 @@ local plugins = {
     function()
       require("configs.lualine")
     end,
-    requires = { "kyazdani42/nvim-web-devicons","SmiteshP/nvim-navic" }
+    requires = { "kyazdani42/nvim-web-devicons" }
   },
   {
     "ibhagwan/fzf-lua",
