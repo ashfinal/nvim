@@ -14,6 +14,9 @@ vim.keymap.set("n", "<C-l>", "<Cmd>vertical resize -4<CR>")
 vim.keymap.set("v", "p", '"_dP')
 vim.keymap.set("n", "Y", "yg$")
 
+vim.keymap.set("n", "]b", "<Cmd>bn<CR>")
+vim.keymap.set("n", "[b", "<Cmd>bp<CR>")
+
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("t", "jk", "<C-\\><C-n>")
 
