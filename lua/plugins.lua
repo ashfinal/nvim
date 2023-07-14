@@ -167,6 +167,12 @@ local plugins = {
     requires = { "kyazdani42/nvim-web-devicons" },
   },
   {
+    "yorickpeterse/nvim-pqf",
+    function()
+      require("configs.pqf")
+    end
+  },
+  {
     "kevinhwang91/nvim-bqf",
     function()
       require("configs.nvim-bqf")
