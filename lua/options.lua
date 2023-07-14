@@ -37,7 +37,7 @@ opt.cedit = ""
 opt.synmaxcol = 300
 opt.jumpoptions = "stack"
 opt.shada = [['100,<50,s10,/500,@200,:500,h]]
-opt.fillchars = { eob = " ", fold = " " }
+opt.fillchars = { eob = " ", fold = " ", lastline = "»" }
 opt.listchars = { tab = "<->", eol = "¬", trail = "⋅", extends = "»", precedes = "«" }
 
 opt.clipboard:append("unnamedplus")
