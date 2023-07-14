@@ -26,6 +26,11 @@ local default = {
     tab_size = 18,
     sort_by = "directory",
     diagnostics = false,
+    custom_filter = function(buf_number, buf_set)
+      if vim.bo[buf_number].filetype ~= "qf" then
+        return true
+      end
+    end,
     offsets = {
       {
         filetype = "NvimTree",
