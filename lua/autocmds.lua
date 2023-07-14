@@ -20,23 +20,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
   desc = "Check for invisible characters and find inconsistency, reveal them if necessary",
 })
 
-local function try_stopping_lspserver(args)
-  vim.lsp.for_each_buffer_client(args['buf'], function(_, client_id, bufnr)
-    local bufs = vim.lsp.get_buffers_by_client_id(client_id)
-    vim.lsp.buf_detach_client(bufnr, client_id)
-    if vim.tbl_count(bufs) == 1 and bufs[1] == bufnr then
-      vim.lsp.stop_client(client_id)
-    end
-  end)
-end
-
-vim.api.nvim_create_autocmd({ "BufWipeout", "BufDelete" }, {
-  pattern = "*",
-  callback = try_stopping_lspserver,
-  group = vim.api.nvim_create_augroup("autostop_lspserver", {}),
-  desc = "Detach LSP client when buffer is deleted and stop server if no buffers are attached",
-})
-
 vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
   callback = function() vim.highlight.on_yank() end,
