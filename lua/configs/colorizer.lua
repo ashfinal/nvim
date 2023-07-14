@@ -15,7 +15,7 @@ local default = {
     rgb_fn = true, -- CSS rgb() and rgba() functions
     hsl_fn = true, -- CSS hsl() and hsla() functions
     tailwind = true,  -- Enable tailwind colors
-    sass = { enable = true, parsers = { css }, }, -- Enable sass colors
+    sass = { enable = true, parsers = { "css" }, }, -- Enable sass colors
     mode = "virtualtext", -- Set the display mode.
   }
 }
