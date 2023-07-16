@@ -5,12 +5,12 @@ luasnip.config.setup({
   ext_opts = {
     [types.choiceNode] = {
       active = {
-        virt_text = {{"●", "Conditional"}}
+        virt_text = {{"∙", "Conditional"}}
       }
     },
     [types.insertNode] = {
       active = {
-        virt_text = {{"●", "String"}}
+        virt_text = {{"∙", "String"}}
       }
     }
   },
