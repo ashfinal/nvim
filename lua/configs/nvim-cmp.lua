@@ -44,9 +44,8 @@ end
 
 local default = {
   enabled = function()
-    if vim.tbl_contains({ "TelescopePrompt" }, vim.o.ft) then
-      return false
-    end
+    if vim.api.nvim_get_mode().mode == 'c' then return true end
+    if vim.tbl_contains({ "TelescopePrompt" }, vim.o.ft) then return false end
     if bufIsBig() then return false end
     return true
   end,
