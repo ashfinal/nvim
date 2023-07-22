@@ -37,6 +37,7 @@ local plugins = {
     "RRethy/nvim-base16",
     function()
       require("base16-colorscheme").setup("onedark")
+      vim.cmd("hi! link Folded NonText")
     end,
   },
   {
