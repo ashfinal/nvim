@@ -49,8 +49,13 @@ local plugins = {
   },
   {
     "ibhagwan/fzf-lua",
+    setup = function()
+      if vim.loop.os_uname().sysname == "Windows" then vim.g.loaded_fzf_lua = 1 end
+    end,
     function()
-      require("configs.fzflua")
+      if vim.loop.os_uname().sysname ~= "Windows" then
+        require("configs.fzflua")
+      end
     end,
     requires = { "kyazdani42/nvim-web-devicons" },
   },
