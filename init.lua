@@ -2,8 +2,6 @@ local modules = {
   "options",
   "mappings",
   "autocmds",
-  "commands",
-  "ondemand",
   "plugins",
 }
 

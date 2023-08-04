@@ -19,7 +19,7 @@ opt.expandtab = true
 opt.smartindent = true
 opt.breakindent = true
 opt.foldmethod = "indent"
-opt.foldlevelstart = 99
+opt.foldenable = false
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.softtabstop = -1
@@ -37,7 +37,7 @@ opt.cedit = ""
 opt.synmaxcol = 300
 opt.jumpoptions = "stack"
 opt.shada = [['100,<50,s10,/500,@200,:500,h]]
-opt.fillchars = { eob = " ", fold = " ", foldopen = "-", foldclose = "+", lastline = "»" }
+opt.fillchars = { eob = " ", fold = " ", lastline = "»" }
 opt.listchars = { tab = "<->", eol = "¬", trail = "⋅", extends = "»", precedes = "«" }
 
 opt.clipboard:append("unnamedplus")
@@ -47,7 +47,7 @@ opt.formatoptions:append("mBn")
 opt.diffopt:append("vertical,indent-heuristic,algorithm:histogram")
 
 g.mapleader = " "
-g.maplocalleader = " "
+g.maplocalleader = "\\"
 
 g.html_dynamic_folds = 1
 g.html_prevent_copy = "fntd"
@@ -65,6 +65,7 @@ local disabled_built_ins = {
   "tar",
   "tarPlugin",
   "rrhelper",
+  "spellfile",
   "spellfile_plugin",
   "vimball",
   "vimballPlugin",
