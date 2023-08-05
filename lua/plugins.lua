@@ -29,7 +29,7 @@ require("lazy").setup({
   defaults = {
     version = false, -- always use the latest git commit
   },
-  ui = { border = "single" },
+  ui = { border = "rounded" },
   performance = {
     rtp = {
       disabled_plugins = {

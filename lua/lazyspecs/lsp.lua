@@ -158,7 +158,7 @@ return {
     cmd = "Mason",
     build = ":MasonUpdate",
     opts = {
-      ui = { border = "single" },
+      ui = { border = "rounded" },
       ensure_installed = {
       },
     },
