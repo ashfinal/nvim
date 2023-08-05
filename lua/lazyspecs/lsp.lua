@@ -42,37 +42,51 @@ return {
         { border = "rounded" }
       )
     end,
-    opts = {
-      capabilities = {},
-      servers = {
-        jsonls = {},
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
+    opts = function()
+      return {
+        capabilities = {},
+        servers = {
+          jsonls = { mason = false },
+          cssls = { mason = false },
+          html = { mason = false },
+          ltex = { mason = false, autostart = false },
+          pyright = { mason = false },
+          taplo = { mason = false },
+          yamlls = { mason = false },
+          emmet_language_server = { mason = false },
+          tailwindcss = {
+            mason = false,
+            root_dir = require("lspconfig.util").root_pattern("tailwindcss.config.js", "tailwindcss.config.ts", "postcss.config.js", "postcss.config.ts"),
+          },
+          tsserver = { mason = false },
+          lua_ls = {
+            -- mason = false, -- set to false if you don't want this server to be installed with mason
+            settings = {
+              Lua = {
+                workspace = {
+                  checkThirdParty = false,
+                },
+                completion = {
+                  callSnippet = "Replace",
+                },
               },
             },
           },
         },
-      },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
-        -- example to setup with typescript.nvim
-        -- tsserver = function(_, opts)
-        --   require("typescript").setup({ server = opts })
-        --   return true
-        -- end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
-      },
-    },
+        -- you can do any additional lsp server setup here
+        -- return true if you don't want this server to be setup with lspconfig
+        ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+        setup = {
+          -- example to setup with typescript.nvim
+          -- tsserver = function(_, opts)
+          --   require("typescript").setup({ server = opts })
+          --   return true
+          -- end,
+          -- Specify * to use this function as a fallback for any server
+          -- ["*"] = function(server, opts) end,
+        },
+      }
+    end,
     config = function(_, opts)
       require("lspconfig.ui.windows").default_options.border = "rounded"
 
