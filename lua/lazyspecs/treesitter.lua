@@ -57,4 +57,27 @@ return {
       use_default_keymaps = false,
     },
   },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = function()
+      local rainbow = require("rainbow-delimiters")
+      return {
+        strategy = {
+          [""] = function()
+            if vim.fn.line("$") > 10000 then
+              return nil
+            elseif vim.fn.line("$") > 5000 then
+              return rainbow.strategy["local"]
+            else
+              return rainbow.strategy["global"]
+            end
+          end,
+        }
+      }
+    end,
+    config = function(_, opts)
+      require("rainbow-delimiters.setup")(opts)
+    end,
+  },
 }

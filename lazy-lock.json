@@ -38,6 +38,7 @@
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "e9062e2dfb9854e6a927370f2d720de354c88524" },
   "nvim-web-devicons": { "branch": "master", "commit": "efbfed0567ef4bfac3ce630524a0f6c8451c5534" },
   "qfview.nvim": { "branch": "main", "commit": "e76e0ae8ca7d24e61fe612209bbc1676af57d7c1" },
+  "rainbow-delimiters.nvim": { "branch": "master", "commit": "c6380e218a2b4ffcc957a71606900a24e5c7b618" },
   "suda.vim": { "branch": "master", "commit": "8b0fc3711760195aba104e2d190cff9af8267052" },
   "treesj": { "branch": "main", "commit": "3203aa553217921fd4dcb79245f9df07278910b2" },
   "twilight.nvim": { "branch": "main", "commit": "a4843e6e67092a1e6fa9666f02bf0ab59174c1df" },
