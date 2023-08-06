@@ -9,7 +9,7 @@ local function reveal_invisible_chars()
     local tab = vim.fn.search(tab_pat, "nwc")
     local mixed = vim.fn.search(mixed_pat, "nwc")
     local result = trailing_spaces > 0 or (space > 0 and tab > 0) or mixed > 0
-    if result then vim.wo.list = true else vim.wo.list = false end
+    vim.wo.list = result
   end
 end
 
