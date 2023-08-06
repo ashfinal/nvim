@@ -64,7 +64,7 @@ return {
       end
 
       local function diff_source()
-        local gitsigns = vim.b.gitsigns_status_dict
+        local gitsigns = vim.b["gitsigns_status_dict"]
         if gitsigns then
           return {
             added = gitsigns.added,

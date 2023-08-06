@@ -211,11 +211,13 @@ return {
     config = function(_, opts)
       local cmp = require("cmp")
       cmp.setup(opts)
+      ---@diagnostic disable-next-line: missing-fields
       cmp.setup.cmdline({ "/", "?" }, {
         sources = {
           { name = "buffer" }
         }
       })
+      ---@diagnostic disable-next-line: missing-fields
       cmp.setup.cmdline(":", {
         sources = cmp.config.sources({
           { name = "path" },
