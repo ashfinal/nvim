@@ -21,7 +21,7 @@ require("lazy").setup({
             vim.api.nvim_set_hl(0, "WinSeparator", { link = "NonText", default = false })
           end,
         })
-        vim.cmd.colorscheme("base16-tomorrow-night-eighties")
+        vim.cmd.colorscheme("base16-espresso")
       end,
     },
     { import = "lazyspecs" },
