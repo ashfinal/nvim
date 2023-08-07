@@ -14,34 +14,6 @@ return {
         end,
       },
     },
-    init = function()
-      local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl })
-      end
-
-      vim.diagnostic.config({
-        virtual_text = true,
-        signs = false,
-        underline = true,
-        update_in_insert = false,
-        severity_sort = false,
-        float = {
-          border = "rounded",
-        },
-      })
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = "rounded" }
-      )
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = "rounded" }
-      )
-    end,
     opts = function()
       return {
         capabilities = {},
@@ -87,7 +59,35 @@ return {
       }
     end,
     config = function(_, opts)
+      local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl })
+      end
+
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = false,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = false,
+        float = {
+          border = "rounded",
+        },
+      })
+
       require("lspconfig.ui.windows").default_options.border = "rounded"
+
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = "rounded" }
+      )
+
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = "rounded" }
+      )
 
       if require("utils").has("neoconf.nvim") then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
