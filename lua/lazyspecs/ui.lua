@@ -53,6 +53,11 @@ return {
         }
       }
     end,
+    config = function(_, opts)
+      require("bufferline").setup(opts)
+      vim.keymap.set("n", "]b", "<Cmd>BufferLineCycleNext<CR>")
+      vim.keymap.set("n", "[b", "<Cmd>BufferLineCyclePrev<CR>")
+    end,
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -120,6 +125,7 @@ return {
           return ret
         end
       },
+      func_map = { split = "<C-s>", fzffilter = "" },
     },
   },
   {
@@ -131,11 +137,39 @@ return {
           scrollbar = false,
         },
       },
+      keymap = {
+        builtin = {
+          -- neovim `:tmap` mappings for the fzf win
+          ["<F1>"]        = "toggle-help",
+          ["<F2>"]        = "toggle-fullscreen",
+          -- Only valid with the 'builtin' previewer
+          ["<F3>"]        = "toggle-preview-wrap",
+          ["<F4>"]        = "toggle-preview",
+          -- Rotate preview clockwise/counter-clockwise
+          ["<F5>"]        = "toggle-preview-ccw",
+          ["<F6>"]        = "toggle-preview-cw",
+          ["<S-down>"]    = "preview-page-down",
+          ["<S-up>"]      = "preview-page-up",
+          ["<S-left>"]    = "preview-page-reset",
+        },
+        fzf = {
+          -- fzf '--bind=' options
+          ["alt-a"]      = "toggle-all",
+          ["pgdn"]     = "page-down",
+          ["pgup"]       = "page-up",
+          -- Only valid with fzf previewers (bat/cat/git/etc)
+          ["f3"]         = "toggle-preview-wrap",
+          ["f4"]         = "toggle-preview",
+          ["shift-down"] = "preview-page-down",
+          ["shift-up"]   = "preview-page-up",
+        },
+      },
     },
     keys = {
       { "<Leader>bb", function() require("fzf-lua").buffers() end, desc = "Fuzzy find buffers" },
       { "<Leader>fl", function() require("fzf-lua").lines() end, desc = "Fuzzy find lines" },
       { "<Leader>ff", function() require("fzf-lua").files() end, desc = "Fuzzy find files" },
+      { "<Leader>fF", function() require("fzf-lua").git_files() end, desc = "Fuzzy find git files" },
       { "<Leader>fo", function() require("fzf-lua").oldfiles() end, desc = "Fuzzy find oldfiles" },
       { "<Leader>ft", function() require("fzf-lua").grep_project() end, desc = "Fuzzy find text in project" },
       { "<Leader>jj", function() require("fzf-lua").jumps() end, desc = "Fuzzy find jumps" },
@@ -165,8 +199,10 @@ return {
         api.config.mappings.default_on_attach(bufnr)
         vim.keymap.del("n", "<BS>", { buffer = bufnr })
         vim.keymap.del("n", "g?", { buffer = bufnr })
+        vim.keymap.del("n", "<C-x>", { buffer = bufnr })
         vim.keymap.set("n", "w", api.node.navigate.parent_close, opts("Close Directory"))
         vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+        vim.keymap.set("n", "<C-s>", api.node.open.horizontal, opts("Open: Horizontal Split"))
       end
 
       return {
