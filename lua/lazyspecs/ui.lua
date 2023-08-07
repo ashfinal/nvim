@@ -258,7 +258,7 @@ return {
     "folke/twilight.nvim",
     cmd = "Twilight",
     opts = {
-      context = 50,
+      context = 0,
     },
   },
   {
