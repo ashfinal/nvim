@@ -237,7 +237,9 @@ return {
   },
   {
     "numToStr/FTerm.nvim",
-    event = "UIEnter",
+    keys = {
+      { "<A-i>", "<Cmd>lua require('FTerm').toggle()<CR>", desc = "Toggle FTerm" },
+    },
     opts = {
       border = "double",
       hl = "Normal",
@@ -249,7 +251,6 @@ return {
     },
     config = function(_, opts)
       require("FTerm").setup(opts)
-      vim.keymap.set("n", "<A-i>", "<Cmd>lua require('FTerm').toggle()<CR>")
       vim.keymap.set("t", "<A-i>", "<C-\\><C-n><Cmd>lua require('FTerm').toggle()<CR>")
     end
   },
