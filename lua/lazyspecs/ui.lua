@@ -63,11 +63,6 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-      local function cwd()
-        local dir_name = vim.fn.fnamemodify(vim.loop.cwd(), ":~")
-        return "📂 " .. dir_name .. " "
-      end
-
       local function diff_source()
         local gitsigns = vim.b["gitsigns_status_dict"]
         if gitsigns then
@@ -89,8 +84,7 @@ return {
           lualine_a = { "fileformat" },
           lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
           lualine_c = {
-            "filename",
-            { cwd },
+            { "filename", path = 3 },
             {
               function() return require("nvim-navic").get_location() end,
               cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
