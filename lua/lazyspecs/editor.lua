@@ -107,7 +107,7 @@ return {
     end,
   },
   {
-    "ashfinal/qfview.nvim",
+    dir = "~/projects/qfview.nvim",
     event = "UIEnter",
     config = true,
   },

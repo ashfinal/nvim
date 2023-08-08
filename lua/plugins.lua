@@ -28,6 +28,11 @@ require("lazy").setup({
   },
   defaults = {
     version = false, -- always use the latest git commit
+    dev = {
+      path = "~/projects",
+      patterns = { "ashfinal" },
+      fallback = true,
+    }
   },
   ui = { border = "rounded" },
   performance = {
