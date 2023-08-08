@@ -82,8 +82,10 @@ return {
         },
         sections = {
           lualine_a = { "fileformat" },
-          lualine_b = { { "b:gitsigns_head", icon = "" }, { "diff", source = diff_source }, "diagnostics" },
+          lualine_b = { { "b:gitsigns_head", icon = "" },  },
           lualine_c = {
+            { "diff", source = diff_source },
+            "diagnostics",
             { "filename", path = 3 },
             {
               function() return require("nvim-navic").get_location() end,
