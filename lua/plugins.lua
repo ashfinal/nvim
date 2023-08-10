@@ -29,6 +29,7 @@ require("lazy").setup({
   defaults = {
     version = false, -- always use the latest git commit
   },
+  ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
     path = "~/projects",
     patterns = { "ashfinal" },
