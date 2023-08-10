@@ -34,6 +34,7 @@ require("lazy").setup({
     patterns = { "ashfinal" },
     fallback = true,
   },
+  install = { colorscheme = { "base16-espresso", "habamax" } },
   ui = { border = "rounded" },
   performance = {
     rtp = {
