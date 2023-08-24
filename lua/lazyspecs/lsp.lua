@@ -6,8 +6,6 @@ return {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       { "folke/neodev.nvim", opts = {} },
       { "b0o/SchemaStore.nvim" },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
@@ -20,7 +18,6 @@ return {
         capabilities = {},
         servers = {
           jsonls = {
-            mason = false,
             -- lazy-load schemastore when needed
             on_new_config = function(new_config)
               new_config.settings.json.schemas = new_config.settings.json.schemas or {}
@@ -28,13 +25,12 @@ return {
             end,
             settings = { json = { validate = true } },
           },
-          cssls = { mason = false },
-          html = { mason = false },
-          ltex = { mason = false, autostart = false },
-          pyright = { mason = false },
-          taplo = { mason = false },
+          cssls = {},
+          html = {},
+          ltex = { autostart = false },
+          pyright = {},
+          taplo = {},
           yamlls = {
-            mason = false,
             -- Have to add this for yamlls to understand that we support line folding
             capabilities = {
               textDocument = {
@@ -63,14 +59,12 @@ return {
               },
             },
           },
-          emmet_language_server = { mason = false },
+          emmet_language_server = {},
           tailwindcss = {
-            mason = false,
             root_dir = require("lspconfig.util").root_pattern("tailwindcss.config.js", "tailwindcss.config.ts", "postcss.config.js", "postcss.config.ts"),
           },
-          tsserver = { mason = false },
+          tsserver = {},
           lua_ls = {
-            -- mason = false, -- set to false if you don't want this server to be installed with mason
             settings = {
               Lua = {
                 workspace = {
@@ -179,58 +173,11 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      -- get all the servers that are available thourgh mason-lspconfig
-      local have_mason, mlsp = pcall(require, "mason-lspconfig")
-      local all_mlsp_servers = {}
-      if have_mason then
-        all_mlsp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-      end
-
-      local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
-          -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(all_mlsp_servers, server) then
             setup(server)
-          else
-            ensure_installed[#ensure_installed + 1] = server
-          end
         end
-      end
-
-      if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-      end
-    end,
-  },
-  {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    build = ":MasonUpdate",
-    opts = {
-      ui = { border = "rounded" },
-      ensure_installed = {
-      },
-    },
-    ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(_, opts)
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
       end
     end,
   },
