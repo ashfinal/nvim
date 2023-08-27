@@ -122,11 +122,12 @@ return {
           format = function(entry, vim_item)
             vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
             vim_item.menu = ({
-              buffer = "[Buffer]",
-              luasnip = "[LuaSnip]",
-              nvim_lsp = "[LSP]",
-              copilot = "[Copilot]",
+              buffer = "[]",
+              luasnip = "[]",
+              nvim_lsp = "[]",
+              copilot = "[]",
             })[entry.source.name]
+            vim_item.abbr = string.gsub(vim_item.abbr, "%(.+%)", "")
             return vim_item
           end
         },
