@@ -11,23 +11,37 @@ return {
       end,
     },
     event = "InsertEnter",
-    config = function()
-      local luasnip = require("luasnip")
+    opts = function()
       local types = require("luasnip.util.types")
-
-      luasnip.config.setup({
+      return {
         ext_opts = {
           [types.choiceNode] = {
             active = {
-              virt_text = {{"∙", "Conditional"}}
+              virt_text = { { "∙", "Conditional" } }
             }
           },
           [types.insertNode] = {
             active = {
-              virt_text = {{"∙", "String"}}
+              virt_text = { { "∙", "String" } }
             }
           }
         },
+      }
+    end,
+    config = function(_, opts)
+      local luasnip = require("luasnip")
+      luasnip.setup(opts)
+
+      vim.api.nvim_create_autocmd("ModeChanged", {
+        pattern = "*",
+        callback = function()
+          if ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+              and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+              and not luasnip.session.jump_active
+          then
+            luasnip.unlink_current()
+          end
+        end
       })
 
       vim.keymap.set({"i", "s"}, "<C-j>", function()
