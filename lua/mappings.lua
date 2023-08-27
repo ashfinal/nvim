@@ -1,5 +1,5 @@
-vim.keymap.set("", "j", "v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj'", { expr = true })
-vim.keymap.set("", "k", "v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk'", { expr = true })
+vim.keymap.set({"n", "x", "o"}, "j", "v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj'", { expr = true })
+vim.keymap.set({"n", "x", "o"}, "k", "v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk'", { expr = true })
 vim.keymap.set("n", "<BS>", "<Cmd>nohlsearch<CR>")
 vim.keymap.set({"i", "c"}, "<C-a>", "<Home>")
 vim.keymap.set({"i", "c"}, "<C-e>", "<End>")
