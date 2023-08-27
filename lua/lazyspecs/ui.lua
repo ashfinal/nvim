@@ -21,7 +21,7 @@ return {
             require("bufdelete").bufdelete(bufnr, true)
           end,
           buffer_close_icon = "",
-          modified_icon = "",
+          modified_icon = "",
           close_icon = "",
           custom_filter = function(buf_number)
             if vim.bo[buf_number].filetype ~= "qf" then
