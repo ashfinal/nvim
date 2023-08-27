@@ -160,20 +160,38 @@ return {
         mapping = {
           ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-n>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item( { behavior = cmp.SelectBehavior.Select } )
-            else
-              fallback()
-            end
-          end, { "i", "c" }),
-          ["<C-p>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item( { behavior = cmp.SelectBehavior.Select } )
-            else
-              fallback()
-            end
-          end, { "i", "c" }),
+          ["<C-n>"] = cmp.mapping({
+            i = function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item( { behavior = cmp.SelectBehavior.Select } )
+              else
+                fallback()
+              end
+            end,
+            c = function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item( { behavior = cmp.SelectBehavior.Insert } )
+              else
+                fallback()
+              end
+            end,
+          }),
+          ["<C-p>"] = cmp.mapping({
+            i = function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item( { behavior = cmp.SelectBehavior.Select } )
+              else
+                fallback()
+              end
+            end,
+            c = function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item( { behavior = cmp.SelectBehavior.Insert } )
+              else
+                fallback()
+              end
+            end,
+          }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() and cmp.get_active_entry() then
               cmp.confirm({ select = false })
