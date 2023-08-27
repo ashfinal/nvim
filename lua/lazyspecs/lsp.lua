@@ -28,6 +28,7 @@ return {
           cssls = {},
           html = {},
           ltex = { autostart = false },
+          sourcekit = {},
           pyright = {},
           taplo = {},
           yamlls = {
