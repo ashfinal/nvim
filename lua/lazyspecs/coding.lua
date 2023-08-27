@@ -148,14 +148,14 @@ return {
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
           ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item( { behavior = cmp.SelectBehavior.Select } )
             else
               fallback()
             end
           end, { "i", "c" }),
           ["<C-p>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item()
+              cmp.select_prev_item( { behavior = cmp.SelectBehavior.Select } )
             else
               fallback()
             end
