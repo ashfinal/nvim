@@ -77,29 +77,29 @@ return {
       local luasnip = require("luasnip")
       local kind_icons = {
         Text = "",
-        Method = "",
-        Function = "",
+        Method = "󰊕",
+        Function = "󰊕",
         Constructor = "",
         Field = "",
         Variable = "󰀫",
-        Class = "ﴯ",
+        Class = "󰠱",
         Interface = "",
         Module = "",
-        Property = "ﰠ",
+        Property = "",
         Unit = "",
-        Value = "",
+        Value = "󰎠",
         Enum = "",
-        Keyword = "",
+        Keyword = "󰌋",
         Snippet = "",
-        Color = "",
-        File = "",
+        Color = "󰏘",
+        File = "󰈙",
         Reference = "",
-        Folder = "",
+        Folder = "󰉋",
         EnumMember = "",
-        Constant = "",
-        Struct = "",
+        Constant = "󰏿",
+        Struct = "󰙅",
         Event = "",
-        Operator = "",
+        Operator = "󰆕",
         TypeParameter = "󰊄",
         Copilot = "",
       }
@@ -136,10 +136,10 @@ return {
           format = function(entry, vim_item)
             vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
             vim_item.menu = ({
-              buffer = "[]",
-              luasnip = "[]",
-              nvim_lsp = "[]",
-              copilot = "[]",
+              buffer = "[ ]",
+              luasnip = "[󱉥 ]",
+              nvim_lsp = "[ ]",
+              copilot = "[ ]",
             })[entry.source.name]
             vim_item.abbr = string.gsub(vim_item.abbr, "%(.+%)", "")
             return vim_item

@@ -92,7 +92,7 @@ return {
       }
     end,
     config = function(_, opts)
-      local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+      local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
@@ -198,14 +198,14 @@ return {
         Module = " ",
         Namespace = "󰦮 ",
         Package = " ",
-        Class = "ﴯ ",
-        Method = " ",
-        Property = "ﰠ ",
+        Class = "󰠱 ",
+        Method = "󰊕 ",
+        Property = " ",
         Field = " ",
         Constructor = " ",
         Enum = " ",
         Interface = " ",
-        Function = " ",
+        Function = "󰊕 ",
         Variable = "󰀫 ",
         Constant = "󰏿 ",
         String = " ",
@@ -216,9 +216,9 @@ return {
         Key = "󰌋 ",
         Null = "󰟢 ",
         EnumMember = " ",
-        Struct = " ",
+        Struct = "󰙅 ",
         Event = " ",
-        Operator = " ",
+        Operator = "󰆕 ",
         TypeParameter = "󰊄 ",
       },
       highlight = false,

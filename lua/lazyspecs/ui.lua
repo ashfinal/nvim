@@ -20,9 +20,9 @@ return {
           right_mouse_command = function(bufnr)
             require("bufdelete").bufdelete(bufnr, true)
           end,
-          buffer_close_icon = "",
-          modified_icon = "",
-          close_icon = "",
+          buffer_close_icon = "󰅖",
+          modified_icon = "",
+          close_icon = "󰅚",
           custom_filter = function(buf_number)
             if vim.bo[buf_number].filetype ~= "qf" then
               return true
@@ -174,6 +174,38 @@ return {
         ["spinner"]     = { "fg", "Label" },
         ["header"]      = { "fg", "Comment" },
         ["gutter"]      = { "bg", "Normal" },
+      },
+      lsp = {
+        symbols = {
+          symbol_icons = {
+            File = "󰈙",
+            Module = "",
+            Namespace = "󰦮",
+            Package = "",
+            Class = "󰠱",
+            Method = "󰊕",
+            Property = "",
+            Field = "",
+            Constructor = "",
+            Enum = "",
+            Interface = "",
+            Function = "󰊕",
+            Variable = "󰀫",
+            Constant = "󰏿",
+            String = "",
+            Number = "󰎠",
+            Boolean = "󰨙",
+            Array = "󱡠",
+            Object = "",
+            Key = "󰌋",
+            Null = "󰟢",
+            EnumMember = "",
+            Struct = "󰙅",
+            Event = "",
+            Operator = "󰆕",
+            TypeParameter = "󰊄",
+          },
+        },
       },
     },
     keys = {
