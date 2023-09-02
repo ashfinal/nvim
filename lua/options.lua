@@ -51,28 +51,3 @@ g.maplocalleader = "\\"
 
 g.html_dynamic_folds = 1
 g.html_prevent_copy = "fntd"
-
-local disabled_built_ins = {
-  -- "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "tar",
-  "tarPlugin",
-  "rrhelper",
-  "spellfile",
-  "spellfile_plugin",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-  g["loaded_" .. plugin] = 1
-end

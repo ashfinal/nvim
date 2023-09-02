@@ -42,9 +42,9 @@ require("lazy").setup({
       disabled_plugins = {
         "gzip",
         "matchit",
-        "matchparen",
         "netrwPlugin",
-        "spellfile_plugin",
+        "rplugin",
+        "spellfile",
         "tarPlugin",
         "zipPlugin",
       }
