@@ -70,7 +70,6 @@ return {
       "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
-      "zbirenbaum/copilot-cmp",
     },
     opts = function()
       local cmp = require("cmp")
@@ -101,7 +100,6 @@ return {
         Event = "",
         Operator = "󰆕",
         TypeParameter = "󰊄",
-        Copilot = "",
       }
 
       local function bufIsBig()
@@ -139,7 +137,6 @@ return {
               buffer = "[ ]",
               luasnip = "[󱉥 ]",
               nvim_lsp = "[ ]",
-              copilot = "[ ]",
             })[entry.source.name]
             vim_item.abbr = string.gsub(vim_item.abbr, "%(.+%)", "")
             return vim_item
@@ -221,7 +218,6 @@ return {
         },
 
         sources = cmp.config.sources({
-          { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
@@ -274,27 +270,6 @@ return {
         qf = false,
         ["."] = false,
         ["*"] = true,
-      },
-    },
-  },
-  {
-    "nvim-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = "copilot.lua",
-        opts = {},
-        config = function(_, opts)
-          local copilot_cmp = require("copilot_cmp")
-          copilot_cmp.setup(opts)
-          -- attach cmp source whenever copilot attaches
-          -- fixes lazy-loading issues with the copilot cmp source
-          require("utils").on_attach(function(client)
-            if client.name == "copilot" then
-              copilot_cmp._on_insert_enter({})
-            end
-          end)
-        end,
       },
     },
   },
