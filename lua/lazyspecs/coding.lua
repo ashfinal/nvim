@@ -240,6 +240,15 @@ return {
     config = function(_, opts)
       local cmp = require("cmp")
       cmp.setup(opts)
+
+      cmp.event:on("menu_opened", function()
+        vim.b["copilot_suggestion_hidden"] = true
+      end)
+
+      cmp.event:on("menu_closed", function()
+        vim.b["copilot_suggestion_hidden"] = false
+      end)
+
       ---@diagnostic disable-next-line: missing-fields
       cmp.setup.cmdline({ "/", "?" }, {
         sources = {
@@ -262,8 +271,16 @@ return {
     opts = {
       panel = { enabled = false, },
       suggestion = {
-        enabled = false,
+        enabled = true,
         debounce = 75,
+        keymap = {
+          accept = "<M-l>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
       },
       filetypes = {
         csv = false,
