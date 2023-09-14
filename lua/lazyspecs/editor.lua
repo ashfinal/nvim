@@ -7,7 +7,7 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "VeryLazy" },
     opts = {
       filetype_exclude = {
         "help",
@@ -28,7 +28,7 @@ return {
         "lsp-installer",
         "",
       },
-      buftype_exclude = { "terminal", "prompt", "nofile" },
+      buftype_exclude = { "terminal", "prompt", "quickfix", "nofile" },
       show_trailing_blankline_indent = false,
       show_first_indent_level = false,
     },
