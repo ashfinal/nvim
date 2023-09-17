@@ -65,6 +65,7 @@ return {
             root_dir = require("lspconfig.util").root_pattern("tailwindcss.config.js", "tailwindcss.config.ts", "postcss.config.js", "postcss.config.ts"),
           },
           tsserver = {},
+          svelte = {},
           lua_ls = {
             settings = {
               Lua = {
