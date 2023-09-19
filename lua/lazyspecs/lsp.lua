@@ -316,6 +316,10 @@ return {
     "j-hui/fidget.nvim",
     tag = "legacy",
     event = { "BufReadPre", "BufNewFile" },
-    config = true,
+    opts = {
+      window = {
+        blend = 0,
+      },
+    },
   },
 }
