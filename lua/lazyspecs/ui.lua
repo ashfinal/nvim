@@ -93,31 +93,7 @@ return {
             },
 
           },
-          lualine_x = {
-            {
-              function()
-                local status = require("copilot.api").status.data
-                return " " .. (status.message or "")
-              end,
-              cond = function()
-                local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
-                return ok and #clients > 0
-              end,
-              color = function()
-                if not package.loaded["copilot"] then
-                  return
-                end
-                local status = require("copilot.api").status.data
-                return ({
-                  [""] = "DiagnosticInfo",
-                  ["Normal"] = "DiagnosticOk",
-                  ["Warning"] = "DiagnosticError",
-                  ["InProgress"] = "DiagnosticWarn",
-                })[status.status] or ""
-              end,
-            },
-            "encoding",
-          },
+          lualine_x = { "encoding" },
           lualine_y = { "progress" },
           lualine_z = { "location" }
         },
