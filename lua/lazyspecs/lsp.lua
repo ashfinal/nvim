@@ -360,4 +360,57 @@ return {
       },
     },
   },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      formatters_by_ft = {
+        c = { "clang_format" },
+        cpp = { "clang_format" },
+        css = { { "prettierd", "prettier" } },
+        go = { "goimports", { "gofumpt", "gofmt" } },
+        html = { { "prettierd", "prettier" } },
+        javascript = { { "prettierd", "prettier" } },
+        lua = { "stylua" },
+        markdown = { { "prettierd", "prettier" } },
+        python = { "isort", "black" },
+        rust = { "rustfmt" },
+        scss = { { "prettierd", "prettier" } },
+        svelte = { { "prettierd", "prettier" } },
+        swift = { "swiftformat", "swift_format" },
+        toml = { "taplo" },
+        typescript = { { "prettierd", "prettier" } },
+        xml = { "xmlformat" },
+        yaml = { { "yamlfmt", "prettierd", "prettier" } },
+      },
+      log_level = vim.log.levels.ERROR,
+      notify_on_error = true,
+    },
+  config = function(_, opts)
+    local conform = require("conform")
+    conform.setup(opts)
+    local function setup_formatexpr_from_conform()
+      if vim.bo.formatexpr == "" and not vim.tbl_isempty(conform.list_formatters(0)) then
+        vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
+      end
+    end
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+      pattern = "*",
+      callback = setup_formatexpr_from_conform,
+      group = vim.api.nvim_create_augroup("setup_formatexpr_from_conform", {}),
+      desc = "Setup formatexpr from conform if empty",
+    })
+    vim.api.nvim_create_user_command("Format", function(args)
+      local range = nil
+      if args.count ~= -1 then
+        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+        range = {
+          start = { args.line1, 0 },
+          ["end"] = { args.line2, end_line:len() },
+        }
+      end
+      require("conform").format({ async = true, lsp_fallback = true, range = range })
+    end, { range = true })
+  end,
+  },
 }
