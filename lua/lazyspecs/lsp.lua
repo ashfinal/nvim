@@ -380,7 +380,6 @@ return {
         swift = { "swiftformat", "swift_format" },
         toml = { "taplo" },
         typescript = { {"deno_fmt", "prettierd", "prettier" } },
-        xml = { "xmlformat" },
         yaml = { { "yamlfmt", "prettierd", "prettier" } },
       },
       log_level = vim.log.levels.ERROR,
