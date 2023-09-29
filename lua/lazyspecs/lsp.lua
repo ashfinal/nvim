@@ -228,24 +228,38 @@ return {
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
 
-      require("utils").on_attach(function(_, buffer)
+      require("utils").on_attach(function(client, buffer)
         local function map(mode, l, r, desc)
           vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
         end
-        map("n", "gs", vim.diagnostic.setqflist, "Show diagnostics")
-        map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic")
-        map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic")
-        map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-        map("n", "gd", vim.lsp.buf.definition, "Go to definition")
-        map("n", "K", vim.lsp.buf.hover, "Hover")
-        map("n", "gl", vim.lsp.buf.implementation, "Go to implementation")
+        local function supports(method)
+          method = method:find("/") and method or "textDocument/" .. method
+          if client.supports_method(method) then
+            return true
+          end
+          return false
+        end
+        if supports("publishDiagnostics") then
+          map("n", "gs", vim.diagnostic.setqflist, "Add diagnostics to quickfix")
+          map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic")
+          map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic")
+        end
+        if supports("declaration") then map("n", "gD", vim.lsp.buf.declaration, "Go to declaration") end
+        if supports("definition") then map("n", "gd", vim.lsp.buf.definition, "Go to definition") end
+        if supports("hover") then map("n", "K", vim.lsp.buf.hover, "Hover") end
+        if supports("implementation") then map("n", "gl", vim.lsp.buf.implementation, "Go to implementation") end
         map("n", "gwa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
         map("n", "gwr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
-        map("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "List workspace folders")
-        map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition")
-        map("n", "gm", vim.lsp.buf.rename, "Rename")
-        map("n", "ga", vim.lsp.buf.code_action, "Code action")
-        map("n", "gr", vim.lsp.buf.references, "References")
+        map("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+          "List workspace folders")
+        if supports("typeDefinition") then map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition") end
+        if supports("rename") then map("n", "gm", vim.lsp.buf.rename, "Rename") end
+        if supports("codeAction") then map({ "n", "x" }, "ga", vim.lsp.buf.code_action, "Code action") end
+        if supports("references") then map("n", "gr", vim.lsp.buf.references, "References") end
+        if supports("callHierarchy/incomingCalls") then map("n", "gc", vim.lsp.buf.incoming_calls, "IncomingCalls") end
+        if supports("callHierarchy/outgoingCalls") then map("n", "go", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
+        if supports("rangeFormatting") then vim.api.nvim_buf_set_option(buffer, "formatexpr",
+            "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})") end
       end)
 
       local servers = opts.servers
