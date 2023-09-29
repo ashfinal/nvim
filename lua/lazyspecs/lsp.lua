@@ -393,37 +393,37 @@ return {
         svelte = { { "prettierd", "prettier" } },
         swift = { "swiftformat", "swift_format" },
         toml = { "taplo" },
-        typescript = { {"deno_fmt", "prettierd", "prettier" } },
+        typescript = { { "deno_fmt", "prettierd", "prettier" } },
         yaml = { { "yamlfmt", "prettierd", "prettier" } },
       },
       log_level = vim.log.levels.ERROR,
       notify_on_error = true,
     },
-  config = function(_, opts)
-    local conform = require("conform")
-    conform.setup(opts)
-    local function setup_formatexpr_from_conform()
-      if vim.bo.formatexpr == "" and not vim.tbl_isempty(conform.list_formatters(0)) then
-        vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
+    config = function(_, opts)
+      local conform = require("conform")
+      conform.setup(opts)
+      local function setup_formatexpr_from_conform()
+        if vim.bo.formatexpr == "" and not vim.tbl_isempty(conform.list_formatters(0)) then
+          vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
+        end
       end
-    end
-    vim.api.nvim_create_autocmd({ "FileType" }, {
-      pattern = "*",
-      callback = setup_formatexpr_from_conform,
-      group = vim.api.nvim_create_augroup("setup_formatexpr_from_conform", {}),
-      desc = "Setup formatexpr from conform if empty",
-    })
-    vim.api.nvim_create_user_command("Format", function(args)
-      local range = nil
-      if args.count ~= -1 then
-        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-        range = {
-          start = { args.line1, 0 },
-          ["end"] = { args.line2, end_line:len() },
-        }
-      end
-      require("conform").format({ async = true, lsp_fallback = true, range = range })
-    end, { range = true })
-  end,
+      vim.api.nvim_create_autocmd({ "FileType" }, {
+        pattern = "*",
+        callback = setup_formatexpr_from_conform,
+        group = vim.api.nvim_create_augroup("setup_formatexpr_from_conform", {}),
+        desc = "Setup formatexpr from conform if empty",
+      })
+      vim.api.nvim_create_user_command("Format", function(args)
+        local range = nil
+        if args.count ~= -1 then
+          local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+          range = {
+            start = { args.line1, 0 },
+            ["end"] = { args.line2, end_line:len() },
+          }
+        end
+        require("conform").format({ async = true, lsp_fallback = true, range = range })
+      end, { range = true })
+    end,
   },
 }
