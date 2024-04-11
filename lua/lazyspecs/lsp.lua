@@ -369,11 +369,12 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    tag = "legacy",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      window = {
-        blend = 0,
+      notification = {
+        window = {
+          winblend = 0,
+        }
       },
     },
   },
