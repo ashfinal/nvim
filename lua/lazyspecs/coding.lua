@@ -104,7 +104,7 @@ return {
 
       local function bufIsBig()
         local max_filesize = 500 * 1024 -- 500 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.fn.expand("%:p"))
+        local ok, stats = pcall(vim.uv.fs_stat, vim.fn.expand("%:p"))
         if ok and stats and stats.size > max_filesize then
           return true
         else
