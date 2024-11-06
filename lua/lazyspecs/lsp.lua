@@ -431,7 +431,38 @@ return {
   },
   {
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {
+      icons = {
+        kinds = {
+          Array = "󱡠 ",
+          Boolean = "󰨙 ",
+          Class = "󰠱 ",
+          Constant = "󰏿 ",
+          Constructor = " ",
+          Enum = " ",
+          EnumMember = " ",
+          Event = " ",
+          Field = " ",
+          File = "󰈙 ",
+          Function = "󰊕 ",
+          Interface = " ",
+          Key = "󰌋 ",
+          Method = "󰊕 ",
+          Module = " ",
+          Namespace = "󰦮 ",
+          Null = "󰟢 ",
+          Number = "󰎠 ",
+          Object = " ",
+          Operator = "󰆕 ",
+          Package = " ",
+          Property = " ",
+          String = " ",
+          Struct = "󰙅 ",
+          TypeParameter = "󰊄 ",
+          Variable = "󰀫 ",
+        },
+      },
+    },
     cmd = "Trouble",
     keys = {
       {
