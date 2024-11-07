@@ -20,8 +20,6 @@ return {
           right_mouse_command = function(bufnr)
             require("bufdelete").bufdelete(bufnr, true)
           end,
-          buffer_close_icon = "󰅖",
-          modified_icon = "",
           close_icon = "󰅚",
           show_close_icon = false,
           custom_filter = function(buf_number)
