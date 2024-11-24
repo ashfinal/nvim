@@ -256,12 +256,12 @@ return {
           "List workspace folders")
         if supports("typeDefinition") then map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition") end
         if supports("rename") then map("n", "gm", vim.lsp.buf.rename, "Rename") end
-        if supports("codeAction") then map({ "n", "x" }, "ga", vim.lsp.buf.code_action, "Code action") end
+        if supports("codeAction") then map({ "n", "x" }, "gA", vim.lsp.buf.code_action, "Code action") end
         if supports("references") then map("n", "gr", vim.lsp.buf.references, "References") end
-        if supports("callHierarchy/incomingCalls") then map("n", "gc", vim.lsp.buf.incoming_calls, "IncomingCalls") end
-        if supports("callHierarchy/outgoingCalls") then map("n", "go", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
-        if supports("rangeFormatting") then vim.api.nvim_buf_set_option(buffer, "formatexpr",
-            "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})") end
+        if supports("callHierarchy/incomingCalls") then map("n", "gC", vim.lsp.buf.incoming_calls, "IncomingCalls") end
+        if supports("callHierarchy/outgoingCalls") then map("n", "gO", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
+        if supports("rangeFormatting") then vim.api.nvim_set_option_value("formatexpr",
+            "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})", { buf = buffer }) end
       end)
 
       local servers = opts.servers

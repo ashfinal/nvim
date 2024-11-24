@@ -242,9 +242,11 @@ return {
         vim.keymap.del("n", "<BS>", { buffer = bufnr })
         vim.keymap.del("n", "g?", { buffer = bufnr })
         vim.keymap.del("n", "<C-x>", { buffer = bufnr })
+        vim.keymap.del("n", "<C-k>", { buffer = bufnr })
         vim.keymap.set("n", "w", api.node.navigate.parent_close, opts("Close Directory"))
         vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
         vim.keymap.set("n", "<C-s>", api.node.open.horizontal, opts("Open: Horizontal Split"))
+        vim.keymap.set("n", "i", api.node.show_info_popup, opts("Info"))
       end
 
       return {
