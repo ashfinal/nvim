@@ -5,7 +5,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSInstallInfo", "TSUpdate", "TSUpdateSync" },
     dependencies = {
-      "windwp/nvim-ts-autotag",
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     opts = {
@@ -23,8 +22,6 @@ return {
         additional_vim_regex_highlighting = false,
       },
       indent = { enable = true },
-      textobjects = { enable = true },
-      autotag = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -43,6 +40,11 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
   },
   {
     "Wansmer/treesj",
