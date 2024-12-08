@@ -207,6 +207,7 @@ return {
         },
       },
     },
+    cmd = "FzfLua",
     keys = {
       { "<Leader>bb", function() require("fzf-lua").buffers() end, desc = "Fuzzy find buffers" },
       { "<Leader>fl", function() require("fzf-lua").lines() end, desc = "Fuzzy find lines" },
