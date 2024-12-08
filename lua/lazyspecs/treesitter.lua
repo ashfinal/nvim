@@ -65,14 +65,14 @@ return {
       local rainbow = require("rainbow-delimiters")
       return {
         strategy = {
-          [""] = function()
-            if vim.fn.line("$") > 10000 then
+          [""] = function(bufnr)
+            local line_count = vim.api.nvim_buf_line_count(bufnr)
+            if line_count > 10000 then
               return nil
-            elseif vim.fn.line("$") > 5000 then
-              return rainbow.strategy["local"]
-            else
+            elseif line_count > 1000 then
               return rainbow.strategy["global"]
             end
+            return rainbow.strategy["local"]
           end,
         }
       }
