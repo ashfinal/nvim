@@ -81,4 +81,25 @@ return {
       require("rainbow-delimiters.setup").setup(opts)
     end,
   },
+  {
+    "aaronik/treewalker.nvim",
+    keys = {
+      { "<C-k>", "<Cmd>Treewalker Up<CR>", mode = { "n", "x" }, desc = "Moves up to the previous neighbor node" },
+      { "<C-j>", "<Cmd>Treewalker Down<CR>", mode = { "n", "x" }, desc = "Moves down to the next neighbor node" },
+      { "<C-h>", "<Cmd>Treewalker Left<CR>", mode = { "n", "x" }, desc = "Moves to the first ancestor node that's on a different line from the current node" },
+      { "<C-l>", "<Cmd>Treewalker Right<CR>", mode = { "n", "x" }, desc = "Moves to the next node down that's indented further than the current node" },
+      { "<C-S-k>", "<Cmd>Treewalker SwapUp<CR>", desc = "Swaps the highest node on the line upwards" },
+      { "<C-S-j>", "<Cmd>Treewalker SwapDown<CR>", desc = "Swaps the biggest node on the line downward" },
+      { "<C-S-h>", "<Cmd>Treewalker SwapLeft<CR>", desc = "Swap the node under the cursor with its previous neighbor" },
+      { "<C-S-l>", "<Cmd>Treewalker SwapRight<CR>", desc = "Swap the node under the cursor with its next neighbor" },
+    },
+    opts = {
+      highlight = true,
+      highlight_duration = 250,
+      highlight_group = 'CursorLine',
+    },
+    config = function(_, opts)
+      require("treewalker").setup(opts)
+    end,
+  },
 }
