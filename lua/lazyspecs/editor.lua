@@ -147,16 +147,6 @@ return {
     end,
   },
   {
-    "t9md/vim-textmanip",
-    event = "UIEnter",
-    init = function()
-      vim.keymap.set("x", "<C-j>", "<Plug>(textmanip-move-down)")
-      vim.keymap.set("x", "<C-k>", "<Plug>(textmanip-move-up)")
-      vim.keymap.set("x", "<C-h>", "<Plug>(textmanip-move-left)")
-      vim.keymap.set("x", "<C-l>", "<Plug>(textmanip-move-right)")
-    end,
-  },
-  {
     "lambdalisue/suda.vim",
     cmd = { "SudaRead", "SudaWrite" },
   },
