@@ -255,9 +255,9 @@ return {
         map("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
           "List workspace folders")
         if supports("typeDefinition") then map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition") end
-        if supports("rename") then map("n", "gm", vim.lsp.buf.rename, "Rename") end
+        if supports("rename") then map("n", "g.", vim.lsp.buf.rename, "Rename") end
         if supports("codeAction") then map({ "n", "x" }, "gA", vim.lsp.buf.code_action, "Code action") end
-        if supports("references") then map("n", "gr", vim.lsp.buf.references, "References") end
+        if supports("references") then map("n", "g/", vim.lsp.buf.references, "References") end
         if supports("callHierarchy/incomingCalls") then map("n", "gC", vim.lsp.buf.incoming_calls, "IncomingCalls") end
         if supports("callHierarchy/outgoingCalls") then map("n", "gO", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
         if supports("rangeFormatting") then vim.api.nvim_set_option_value("formatexpr",
@@ -466,33 +466,33 @@ return {
     cmd = "Trouble",
     keys = {
       {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
+        "<Leader>tx",
+        "<Cmd>Trouble diagnostics toggle<CR>",
         desc = "Diagnostics (Trouble)",
       },
       {
-        "<leader>xb",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        "<Leader>tX",
+        "<Cmd>Trouble diagnostics toggle filter.buf=0<CR>",
         desc = "Buffer Diagnostics (Trouble)",
       },
       {
-        "<leader>ts",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
+        "<Leader>ts",
+        "<Cmd>Trouble symbols toggle focus=false<CR>",
         desc = "Symbols (Trouble)",
       },
       {
-        "<leader>tl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
+        "<Leader>ti",
+        "<Cmd>Trouble lsp toggle focus=false win.position=right<CR>",
+        desc = "LSP Definitions / references / implementations (Trouble)",
       },
       {
-        "<leader>xl",
-        "<cmd>Trouble loclist toggle<cr>",
+        "<Leader>tl",
+        "<Cmd>Trouble loclist toggle<CR>",
         desc = "Location List (Trouble)",
       },
       {
-        "<leader>xq",
-        "<cmd>Trouble qflist toggle<cr>",
+        "<Leader>tq",
+        "<Cmd>Trouble qflist toggle<CR>",
         desc = "Quickfix List (Trouble)",
       },
     },
