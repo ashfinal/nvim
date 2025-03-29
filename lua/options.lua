@@ -35,6 +35,7 @@ opt.fileencodings = { "ucs-bom", "utf-8", "default", "cp936", "big5", "latin1" }
 opt.termguicolors = true
 opt.cedit = ""
 opt.synmaxcol = 300
+opt.winborder = "single"
 opt.jumpoptions = "stack"
 opt.shada = [['100,<50,s10,/500,@200,:500,h]]
 opt.fillchars = { eob = " ", fold = " ", lastline = "»" }
