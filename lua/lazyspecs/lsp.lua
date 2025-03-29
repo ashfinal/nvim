@@ -203,27 +203,18 @@ return {
       end
 
       vim.diagnostic.config({
-        virtual_text = true,
+        virtual_text = false,
+        virtual_lines = true,
         signs = false,
         underline = true,
         update_in_insert = false,
         severity_sort = false,
         float = {
-          border = "rounded",
+          border = "single",
         },
       })
 
-      require("lspconfig.ui.windows").default_options.border = "rounded"
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = "rounded" }
-      )
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = "rounded" }
-      )
+      require("lspconfig.ui.windows").default_options.border = "single"
 
       if require("utils").has("neoconf.nvim") then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
@@ -357,7 +348,7 @@ return {
       floating_window = true,
       hi_parameter = "PmenuSel",
       handler_opts = {
-        border = "rounded",
+        border = "single",
       }
     },
     config = function(_, opts)

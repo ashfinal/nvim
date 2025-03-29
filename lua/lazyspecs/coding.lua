@@ -147,10 +147,12 @@ return {
           completion = cmp.config.window.bordered({
             border = "none",
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+            scrollbar = false,
           }),
           documentation = cmp.config.window.bordered({
             border = "solid",
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
+            scrollbar = false,
           }),
         },
 
@@ -294,7 +296,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      preview_config = { border = "rounded", },
+      preview_config = { border = "single", },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
