@@ -14,6 +14,4 @@ vim.keymap.set("n", "<M-h>", "<Cmd>vertical resize -4<CR>")
 vim.keymap.set("n", "]b", "<Cmd>bn<CR>")
 vim.keymap.set("n", "[b", "<Cmd>bp<CR>")
 
-vim.keymap.set("i", "jk", "<Esc>")
-
 vim.cmd [[nnoremap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]']]
