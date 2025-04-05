@@ -15,6 +15,5 @@ vim.keymap.set("n", "]b", "<Cmd>bn<CR>")
 vim.keymap.set("n", "[b", "<Cmd>bp<CR>")
 
 vim.keymap.set("i", "jk", "<Esc>")
-vim.keymap.set("t", "jk", "<C-\\><C-n>")
 
 vim.cmd [[nnoremap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]']]
