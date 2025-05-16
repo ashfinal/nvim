@@ -5,12 +5,6 @@ return {
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       { "b0o/SchemaStore.nvim" },
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("utils").has("nvim-cmp")
-        end,
-      },
     },
     opts = function()
       return {
@@ -335,27 +329,6 @@ return {
       depth_limit_indicator = "..",
       safe_output = true,
     }
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      bind = true,
-      doc_lines = 0,
-      hint_enable = false,
-      hint_prefix = " ",
-      hint_scheme = "Comment",
-      floating_window = true,
-      hi_parameter = "PmenuSel",
-      handler_opts = {
-        border = "single",
-      }
-    },
-    config = function(_, opts)
-      require("utils").on_attach(function()
-        require("lsp_signature").on_attach(opts)
-      end)
-    end,
   },
   {
     "j-hui/fidget.nvim",

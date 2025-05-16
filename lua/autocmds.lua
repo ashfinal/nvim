@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
-  callback = function() vim.highlight.on_yank({ on_visual = false }) end,
+  callback = function() vim.hl.on_yank({ on_visual = false }) end,
   group = vim.api.nvim_create_augroup("highlight_yanked_text", {}),
   desc = "Briefly highlight yanked text",
 })

@@ -1,6 +1,7 @@
 return {
   {
     "L3MON4D3/LuaSnip",
+    version = "2.*",
     build = (not jit.os:find("Windows"))
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
       or nil,
@@ -28,243 +29,67 @@ return {
         },
       }
     end,
-    config = function(_, opts)
-      local luasnip = require("luasnip")
-      luasnip.setup(opts)
-
-      vim.api.nvim_create_autocmd("ModeChanged", {
-        pattern = "*",
-        callback = function()
-          if ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
-              and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
-              and not luasnip.session.jump_active
-          then
-            luasnip.unlink_current()
-          end
-        end
-      })
-
-      vim.keymap.set({"i", "s"}, "<C-j>", function()
-        if luasnip.choice_active() then
-          return luasnip.next_choice()
-        else
-          return "<C-j>"
-        end
-      end, { silent = true, expr = true })
-
-      vim.keymap.set({"i", "s"}, "<C-k>", function()
-        if luasnip.choice_active() then
-          return luasnip.prev_choice()
-        else
-          return "<C-k>"
-        end
-      end, { silent = true, expr = true })
-    end,
   },
   {
-    "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
-    dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lsp",
-    },
-    opts = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      local kind_icons = {
-        Text = "",
-        Method = "󰊕",
-        Function = "󰊕",
-        Constructor = "",
-        Field = "",
-        Variable = "󰀫",
-        Class = "󰠱",
-        Interface = "",
-        Module = "",
-        Property = "",
-        Unit = "",
-        Value = "󰎠",
-        Enum = "",
-        Keyword = "󰌋",
-        Snippet = "",
-        Color = "󰏘",
-        File = "󰈙",
-        Reference = "",
-        Folder = "󰉋",
-        EnumMember = "",
-        Constant = "󰏿",
-        Struct = "󰙅",
-        Event = "",
-        Operator = "󰆕",
-        TypeParameter = "󰊄",
-      }
-
-      local function bufIsBig()
-        local max_filesize = 500 * 1024 -- 500 KB
-        local ok, stats = pcall(vim.uv.fs_stat, vim.fn.expand("%:p"))
-        if ok and stats and stats.size > max_filesize then
-          return true
-        else
-          return false
-        end
-      end
-
-      return {
-        enabled = function()
-          if vim.api.nvim_get_mode().mode == 'c' then return true end
-          if vim.tbl_contains({ "TelescopePrompt" }, vim.o.ft) then return false end
-          if bufIsBig() then return false end
-          return true
-        end,
-
-        completion = {
-          completeopt = "menuone,noselect",
-        },
-
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-
-        formatting = {
-          format = function(entry, vim_item)
-            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-            vim_item.menu = ({
-              buffer = "[ ]",
-              luasnip = "[󱉥 ]",
-              nvim_lsp = "[ ]",
-            })[entry.source.name]
-            vim_item.abbr = string.gsub(vim_item.abbr, "%(.+%)", "")
-            return vim_item
-          end
-        },
-
-        window = {
-          completion = cmp.config.window.bordered({
-            border = "none",
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-            scrollbar = false,
-          }),
-          documentation = cmp.config.window.bordered({
-            border = "solid",
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
-            scrollbar = false,
-          }),
-        },
-
-        mapping = {
-          ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-n>"] = cmp.mapping({
-            i = function(fallback)
-              if cmp.visible() then
-                cmp.select_next_item( { behavior = cmp.SelectBehavior.Select } )
-              else
-                fallback()
-              end
-            end,
-            c = function(fallback)
-              if cmp.visible() then
-                cmp.select_next_item( { behavior = cmp.SelectBehavior.Insert } )
-              else
-                fallback()
-              end
-            end,
-          }),
-          ["<C-p>"] = cmp.mapping({
-            i = function(fallback)
-              if cmp.visible() then
-                cmp.select_prev_item( { behavior = cmp.SelectBehavior.Select } )
-              else
-                fallback()
-              end
-            end,
-            c = function(fallback)
-              if cmp.visible() then
-                cmp.select_prev_item( { behavior = cmp.SelectBehavior.Insert } )
-              else
-                fallback()
-              end
-            end,
-          }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm({ select = false })
-            elseif luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
-          ["<CR>"] = cmp.mapping({
-            i = function(fallback)
-              if cmp.visible() and cmp.get_active_entry() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-              else
-                fallback()
-              end
-            end,
-          }),
-        },
-
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" },
-          {
-            name = "buffer",
-            option = {
-              keyword_length = 2,
-              get_bufnrs = function()
-                local bufs = {}
-                for _, win in ipairs(vim.api.nvim_list_wins()) do
-                  bufs[vim.api.nvim_win_get_buf(win)] = true
-                end
-                return vim.tbl_keys(bufs)
-              end,
-            },
+    "saghen/blink.cmp",
+    event = "VimEnter",
+    version = "1.*",
+    dependencies = { "L3MON4D3/LuaSnip", "folke/lazydev.nvim" },
+    opts= {
+      completion = {
+        menu = {
+          draw = {
+            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
           },
-        })
-      }
-    end,
-    config = function(_, opts)
-      local cmp = require("cmp")
-      cmp.setup(opts)
-
-      cmp.event:on("menu_opened", function()
-        vim.b["copilot_suggestion_hidden"] = true
-      end)
-
-      cmp.event:on("menu_closed", function()
-        vim.b["copilot_suggestion_hidden"] = false
-      end)
-
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.cmdline({ "/", "?" }, {
-        sources = {
-          { name = "buffer" }
-        }
-      })
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.cmdline(":", {
-        sources = cmp.config.sources({
-          { name = "path" },
-          { name = "cmdline" },
-        })
-      })
-    end,
+        },
+        list = {
+          selection = { preselect = false },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+        },
+      },
+      keymap = {
+        preset = "default",
+        ["<C-Space>"] = {},
+        ["<C-k>"] = { "fallback" },
+        ["<C-y>"] = { "fallback" },
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_menu_visible() and cmp.get_selected_item_idx() then
+              return cmp.accept()
+            elseif cmp.snippet_active() then
+              return cmp.snippet_forward()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "fallback",
+        },
+      },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+        providers = {
+          lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+        },
+      },
+      cmdline = {
+        completion = {
+          menu = {
+            auto_show = false,
+          }
+        },
+        keymap = {
+          preset = "cmdline",
+          ["<C-space>"] = {},
+          ["<C-e>"] = { "cancel", "fallback" },
+        },
+      },
+      snippets = { preset = "luasnip" },
+      signature = { enabled = true },
+    },
   },
   {
     "zbirenbaum/copilot.lua",
@@ -327,17 +152,8 @@ return {
     cmd = "LazyDev",
     opts = {
       library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
-  },
-  -- Manage libuv types with lazy. Plugin will never be loaded
-  { "Bilal2453/luvit-meta", lazy = true },
-  -- Add lazydev source to cmp
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "lazydev", group_index = 0 })
-    end,
   },
 }
