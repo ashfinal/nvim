@@ -32,7 +32,7 @@ return {
   },
   {
     "saghen/blink.cmp",
-    event = "VimEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     version = "1.*",
     dependencies = { "L3MON4D3/LuaSnip", "folke/lazydev.nvim" },
     opts= {
