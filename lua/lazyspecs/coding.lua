@@ -38,6 +38,7 @@ return {
     opts= {
       completion = {
         menu = {
+          border = "none",
           draw = {
             columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
           },
