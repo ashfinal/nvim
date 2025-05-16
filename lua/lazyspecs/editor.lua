@@ -94,26 +94,6 @@ return {
     },
   },
   {
-    "numToStr/Comment.nvim",
-    keys = {
-      { "gc", nil, mode = { "n", "x" } },
-      { "gb", nil, mode = { "n", "x" } },
-    },
-    opts = {
-      ignore = "^$",
-    },
-    config = function(_, opts)
-      if package.loaded.ts_context_commentstring then
-        opts = vim.tbl_extend("force", opts, {
-          pre_hook = require(
-            "ts_context_commentstring.integrations.comment_nvim"
-          ).create_pre_hook()
-        })
-      end
-      require("Comment").setup(opts)
-    end,
-  },
-  {
     "ashfinal/qfview.nvim",
     dev = true,
     event = "UIEnter",
