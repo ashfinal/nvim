@@ -84,7 +84,7 @@ return {
         },
         keymap = {
           preset = "cmdline",
-          ["<C-space>"] = {},
+          ["<C-Space>"] = {},
           ["<C-e>"] = { "cancel", "fallback" },
         },
       },
