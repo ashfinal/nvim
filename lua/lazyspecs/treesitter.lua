@@ -18,15 +18,6 @@ return {
       end,
     },
     opts = {
-      ensure_installed = {
-        "c",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "query",
-        "vim",
-        "vimdoc",
-      },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,

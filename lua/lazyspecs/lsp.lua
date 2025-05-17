@@ -250,7 +250,7 @@ return {
         if supports("callHierarchy/outgoingCalls") then map("n", "grO", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
         if supports("rangeFormatting") then vim.api.nvim_set_option_value("formatexpr",
             "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})", { buf = buffer }) end
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
           map("n", "<Leader>th", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = buffer })
           end, "Toggle Inlay Hints")
