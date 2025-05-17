@@ -232,20 +232,11 @@ return {
           map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic")
           map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic")
         end
-        if supports("declaration") then map("n", "gD", vim.lsp.buf.declaration, "Go to declaration") end
-        if supports("definition") then map("n", "gd", vim.lsp.buf.definition, "Go to definition") end
-        if supports("hover") then map("n", "K", vim.lsp.buf.hover, "Hover") end
-        if supports("implementation") then map("n", "gl", vim.lsp.buf.implementation, "Go to implementation") end
-        map("n", "gwa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
-        map("n", "gwr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
-        map("n", "gwl", function() return print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-          "List workspace folders")
-        if supports("typeDefinition") then map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition") end
-        if supports("rename") then map("n", "g.", vim.lsp.buf.rename, "Rename") end
-        if supports("codeAction") then map({ "n", "x" }, "gA", vim.lsp.buf.code_action, "Code action") end
-        if supports("references") then map("n", "g/", vim.lsp.buf.references, "References") end
-        if supports("callHierarchy/incomingCalls") then map("n", "gC", vim.lsp.buf.incoming_calls, "IncomingCalls") end
-        if supports("callHierarchy/outgoingCalls") then map("n", "gO", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
+        if supports("declaration") then map("n", "grD", vim.lsp.buf.declaration, "Go to declaration") end
+        if supports("definition") then map("n", "grd", vim.lsp.buf.definition, "Go to definition") end
+        if supports("typeDefinition") then map("n", "grt", vim.lsp.buf.type_definition, "Go to type definition") end
+        if supports("callHierarchy/incomingCalls") then map("n", "grI", vim.lsp.buf.incoming_calls, "IncomingCalls") end
+        if supports("callHierarchy/outgoingCalls") then map("n", "grO", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
         if supports("rangeFormatting") then vim.api.nvim_set_option_value("formatexpr",
             "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})", { buf = buffer }) end
       end)
