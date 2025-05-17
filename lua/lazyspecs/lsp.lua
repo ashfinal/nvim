@@ -233,7 +233,7 @@ return {
         end
         local function supports(method)
           method = method:find("/") and method or "textDocument/" .. method
-          if client.supports_method(method) then
+          if client:supports_method(method) then
             return true
           end
           return false
