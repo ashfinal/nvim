@@ -41,7 +41,10 @@ opt.shada = [['100,<50,s10,/500,@200,:500,h]]
 opt.fillchars = { eob = " ", fold = " ", lastline = "»" }
 opt.listchars = { tab = "<->", eol = "¬", trail = "⋅", extends = "»", precedes = "«" }
 
-opt.clipboard:append("unnamedplus")
+vim.schedule(function()
+  opt.clipboard = "unnamedplus"
+end)
+
 opt.shortmess:append("mrwIc")
 opt.nrformats:append("unsigned")
 opt.formatoptions:append("mBn")
