@@ -240,8 +240,8 @@ return {
         end
         if supports("publishDiagnostics") then
           map("n", "gs", vim.diagnostic.setqflist, "Add diagnostics to quickfix")
-          map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic")
-          map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic")
+          map("n", "[d", function() vim.diagnostic.jump({ count=-1, float=true }) end, "Go to previous diagnostic")
+          map("n", "]d", function() vim.diagnostic.jump({ count=1, float=true }) end, "Go to next diagnostic")
         end
         if supports("declaration") then map("n", "grD", vim.lsp.buf.declaration, "Go to declaration") end
         if supports("definition") then map("n", "grd", vim.lsp.buf.definition, "Go to definition") end
