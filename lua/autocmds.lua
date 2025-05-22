@@ -1,15 +1,8 @@
 local function reveal_invisible_chars()
   if vim.bo.modifiable then
-    local trailing_pat = [[ \+$]]
-    local space_pat = [[^ \+]]
-    local tab_pat = [[^\t\+]]
-    local mixed_pat = [[^\(\t\+ \| \+\t\)]]
-    local trailing_spaces = vim.fn.search(trailing_pat, "nwc")
-    local space = vim.fn.search(space_pat, "nwc")
-    local tab = vim.fn.search(tab_pat, "nwc")
-    local mixed = vim.fn.search(mixed_pat, "nwc")
-    local result = trailing_spaces > 0 or (space > 0 and tab > 0) or mixed > 0
-    vim.wo.list = result
+    local search_pat = [[ \+$\|^ \+\_.\+\_^\t\+\|^\t\+\_.\+\_^ \+\|^\(\t\+ \| \+\t\)]]
+    local match_result = vim.fn.search(search_pat, "nwc") > 0
+    vim.wo.list = match_result
   end
 end
 
