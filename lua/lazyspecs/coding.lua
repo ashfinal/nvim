@@ -44,7 +44,7 @@ return {
           },
         },
         list = {
-          selection = { preselect = false },
+          selection = { preselect = false, auto_insert = false, },
         },
         documentation = {
           auto_show = true,
@@ -54,19 +54,22 @@ return {
       keymap = {
         preset = "default",
         ["<C-Space>"] = {},
+        ["<Space>"] = { "show_documentation", "hide_documentation", "fallback" },
+        ["<C-e>"] = { "hide", "fallback" },
+        ["<C-c>"] = { "cancel", "fallback" },
         ["<C-k>"] = { "fallback" },
         ["<C-y>"] = { "fallback" },
         ["<Tab>"] = {
           function(cmp)
-            if cmp.is_menu_visible() and cmp.get_selected_item_idx() then
-              return cmp.accept()
-            elseif cmp.snippet_active() then
+            if cmp.snippet_active() then
               return cmp.snippet_forward()
             else
-              return cmp.select_and_accept()
+              if cmp.is_menu_visible() then
+                if cmp.get_selected_item() then return cmp.accept() else return cmp.select_and_accept() end
+              end
             end
           end,
-          "fallback",
+          "fallback_to_mappings",
         },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
