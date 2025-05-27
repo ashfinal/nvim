@@ -209,8 +209,8 @@ return {
       end
 
       vim.diagnostic.config({
-        virtual_text = false,
-        virtual_lines = true,
+        virtual_text = true,
+        virtual_lines = false,
         signs = false,
         underline = true,
         update_in_insert = false,
