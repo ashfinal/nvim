@@ -9,7 +9,6 @@ opt.pumheight = 10
 opt.number = false
 opt.numberwidth = 1
 opt.relativenumber = true
-opt.virtualedit = "block"
 opt.showcmd = false
 opt.showmode = false
 opt.ruler = false

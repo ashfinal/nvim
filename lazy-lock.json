@@ -16,7 +16,7 @@
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
   "lualine.nvim": { "branch": "master", "commit": "0c6cca9f2c63dadeb9225c45bc92bb95a151d4af" },
   "marks.nvim": { "branch": "master", "commit": "f353e8c08c50f39e99a9ed474172df7eddd89b72" },
-  "neoconf.nvim": { "branch": "main", "commit": "d790ec65471d00e88aefa7e2a2f4bbac09161b42" },
+  "neoconf.nvim": { "branch": "main", "commit": "3da00bcf27265e2115d82160756d80312580035a" },
   "nvim-autopairs": { "branch": "master", "commit": "4d74e75913832866aa7de35e4202463ddf6efd1b" },
   "nvim-base16": { "branch": "master", "commit": "f9ce7474c54803cb0fa308b0b91549d394a07940" },
   "nvim-bqf": { "branch": "main", "commit": "e20417d5e589e03eaaaadc4687904528500608be" },
