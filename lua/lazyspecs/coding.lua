@@ -53,20 +53,21 @@ return {
       },
       keymap = {
         preset = "default",
-        ["<C-Space>"] = {},
+        ["<C-Space>"] = { "show", "hide" },
         ["<Space>"] = { "show_documentation", "hide_documentation", "fallback" },
-        ["<C-e>"] = { "hide", "fallback" },
+        ["<C-e>"] = { "fallback" },
         ["<C-c>"] = { "cancel", "fallback" },
         ["<C-k>"] = { "fallback" },
         ["<C-y>"] = { "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
         ["<Tab>"] = {
           function(cmp)
-            if cmp.snippet_active() then
+            if cmp.get_selected_item() then
+              return cmp.accept()
+            elseif cmp.snippet_active() then
               return cmp.snippet_forward()
-            else
-              if cmp.is_menu_visible() then
-                if cmp.get_selected_item() then return cmp.accept() else return cmp.select_and_accept() end
-              end
+            elseif cmp.is_menu_visible() then
+                 return cmp.select_and_accept()
             end
           end,
           "fallback_to_mappings",
