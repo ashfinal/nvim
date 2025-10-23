@@ -36,7 +36,6 @@ return {
           },
           cssls = {},
           html = {},
-          ltex = {},
           sourcekit = {
           },
           clangd = {
@@ -106,7 +105,7 @@ return {
             },
           },
           pyright = {},
-          taplo = {},
+          tombi = {},
           yamlls = {
             -- Have to add this for yamlls to understand that we support line folding
             capabilities = {
