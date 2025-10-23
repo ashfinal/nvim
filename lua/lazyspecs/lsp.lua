@@ -244,6 +244,8 @@ return {
         if supports("definition") then map("n", "grd", vim.lsp.buf.definition, "Go to definition") end
         if supports("callHierarchy/incomingCalls") then map("n", "grI", vim.lsp.buf.incoming_calls, "IncomingCalls") end
         if supports("callHierarchy/outgoingCalls") then map("n", "grO", vim.lsp.buf.outgoing_calls, "OutgoingCalls") end
+        if supports("rangeFormatting") then vim.api.nvim_set_option_value("formatexpr",
+            "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})", { buf = buffer }) end
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
           map("n", "<Leader>th", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = buffer })
@@ -344,7 +346,6 @@ return {
         rust = { "rustfmt" },
         scss = { "prettier" },
         svelte = { "prettier" },
-        swift = { "swift_format" },
         toml = { "tombi" },
         typescript = { "deno_fmt" },
         yaml = { "yamlfmt" },
