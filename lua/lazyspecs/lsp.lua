@@ -9,9 +9,30 @@ return {
     },
     opts = function()
       return {
-        capabilities = {},
+        -- global capabilities
+        capabilities = {
+          workspace = {
+            fileOperations = {
+              didRename = true,
+              willRename = true,
+            },
+          },
+        },
         servers = {
           jsonls = {
+            -- lazy-load schemastore when needed
+            before_init = function(_, new_config)
+              new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+              vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+            end,
+            settings = {
+              json = {
+                format = {
+                  enable = true,
+                },
+                validate = { enable = true },
+              },
+            },
           },
           cssls = {},
           html = {},
@@ -19,21 +40,164 @@ return {
           sourcekit = {
           },
           clangd = {
+            root_markers = {
+              "compile_commands.json",
+              "compile_flags.txt",
+              "configure.ac", -- AutoTools
+              "Makefile",
+              "configure.ac",
+              "configure.in",
+              "config.h.in",
+              "meson.build",
+              "meson_options.txt",
+              "build.ninja",
+              ".git",
+            },
+            capabilities = {
+              offsetEncoding = { "utf-16" },
+            },
+            cmd = {
+              "clangd",
+              "--background-index",
+              "--clang-tidy",
+              "--header-insertion=iwyu",
+              "--completion-style=detailed",
+              "--function-arg-placeholders",
+              "--fallback-style=llvm",
+            },
+            init_options = {
+              usePlaceholders = true,
+              completeUnimported = true,
+              clangdFileStatus = true,
+            },
           },
           rust_analyzer = {
+            settings = {
+              -- rust-analyzer language server configuration
+              ["rust-analyzer"] = {
+                cargo = {
+                  features = "all",
+                },
+                check = {
+                  command = "clippy",
+                },
+                procMacro = {
+                  enable = true,
+                  ignored = {
+                    ["async-trait"] = { "async_trait" },
+                    ["napi-derive"] = { "napi" },
+                    ["async-recursion"] = { "async_recursion" },
+                  },
+                },
+                files = {
+                  excludeDirs = {
+                    ".direnv",
+                    ".git",
+                    ".github",
+                    ".gitlab",
+                    "bin",
+                    "node_modules",
+                    "target",
+                    "venv",
+                    ".venv",
+                  },
+                },
+              },
+            },
           },
           pyright = {},
           taplo = {},
           yamlls = {
+            -- Have to add this for yamlls to understand that we support line folding
+            capabilities = {
+              textDocument = {
+                foldingRange = {
+                  dynamicRegistration = false,
+                  lineFoldingOnly = true,
+                },
+              },
+            },
+            -- lazy-load schemastore when needed
+            before_init = function(_, new_config)
+              new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+                "force",
+                new_config.settings.yaml.schemas or {},
+                require("schemastore").yaml.schemas()
+              )
+            end,
+            settings = {
+              redhat = { telemetry = { enabled = false } },
+              yaml = {
+                keyOrdering = false,
+                format = {
+                  enable = true,
+                },
+                validate = true,
+                schemaStore = {
+                  -- Must disable built-in schemaStore support to use
+                  -- schemas from SchemaStore.nvim plugin
+                  enable = false,
+                  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                  url = "",
+                },
+              },
+            },
           },
           emmet_language_server = {},
           tailwindcss = {
           },
-          ts_ls= {},
+          ts_ls = {},
           svelte = {},
           lua_ls = {
+            settings = {
+              Lua = {
+                workspace = {
+                  checkThirdParty = false,
+                },
+                codeLens = {
+                  enable = true,
+                },
+                completion = {
+                  callSnippet = "Replace",
+                },
+                doc = {
+                  privateName = { "^_" },
+                },
+                hint = {
+                  enable = true,
+                  setType = false,
+                  paramType = true,
+                  paramName = "Disable",
+                  semicolon = "Disable",
+                  arrayIndex = "Disable",
+                },
+              },
+            },
           },
           gopls = {
+            settings = {
+              gopls = {
+                hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+                },
+                analyses = {
+                  nilness = true,
+                  unusedparams = true,
+                  unusedwrite = true,
+                  useany = true,
+                },
+                usePlaceholders = true,
+                completeUnimported = true,
+                staticcheck = true,
+                directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+              },
+            },
           },
         },
       }
