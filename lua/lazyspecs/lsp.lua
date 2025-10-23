@@ -345,7 +345,7 @@ return {
         scss = { "prettier" },
         svelte = { "prettier" },
         swift = { "swift_format" },
-        toml = { "taplo" },
+        toml = { "tombi" },
         typescript = { "deno_fmt" },
         yaml = { "yamlfmt" },
       },
