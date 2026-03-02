@@ -74,13 +74,20 @@ return {
         "!popup",
         nofile = { mode = "background" },
       },
-      user_default_options = {
-        names = false,
-        rgb_fn = true,
-        hsl_fn = true,
-        tailwind = true,
-        sass = { enable = true, parsers = { "css" }, },
-        mode = "virtualtext",
+      options = {
+        parsers = {
+          names = { enable = false },
+          hex = { enable = true },
+          rgb_fn = true,
+          hsl_fn = true,
+          oklch_fn = true,
+          tailwind = { enable = true },
+          sass = { enable = true, parsers = { "css" } },
+        },
+        display = {
+          mode = "virtualtext",
+          virtualtext = { position = "eol" },
+        },
       },
     },
   },
