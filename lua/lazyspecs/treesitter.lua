@@ -1,46 +1,15 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    branch= "master",
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "TSInstall", "TSInstallInfo", "TSUpdate", "TSUpdateSync" },
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      config = function()
-        require('ts_context_commentstring').setup({ enable_autocmd = false, })
-        local get_option = vim.filetype.get_option
-        ---@diagnostic disable-next-line: duplicate-set-field
-        vim.filetype.get_option = function(filetype, option)
-          return option == "commentstring"
-              and require("ts_context_commentstring.internal").calculate_commentstring()
-              or get_option(filetype, option)
-        end
-      end,
-    },
-    opts = {
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          scope_incremental = "+",
-          node_decremental = "-",
-        },
-        is_supported = function()
-          local ct = vim.fn.getcmdwintype()
-          if ct ~= "" then return false end
-          return true
-        end,
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    opts = { enable_autocmd = false },
+    init = function()
+      local get_option = vim.filetype.get_option
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.filetype.get_option = function(filetype, option)
+        return option == "commentstring"
+          and require("ts_context_commentstring.internal").calculate_commentstring()
+          or get_option(filetype, option)
+      end
     end,
   },
   {
@@ -50,7 +19,6 @@ return {
   },
   {
     "Wansmer/treesj",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
     keys = {
       { "<Leader>M", "<Cmd>TSJToggle<CR>", desc = "TreeSJ toggle" },
       { "<Leader>J", "<Cmd>TSJJoin<CR>", desc = "TreeSJ join" },
