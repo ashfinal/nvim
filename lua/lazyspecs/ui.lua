@@ -132,6 +132,13 @@ return {
           scrollbar = false,
         },
       },
+      previewers = {
+        builtin = {
+          treesitter = {
+            enabled = false,
+          },
+        },
+      },
       keymap = {
         builtin = {
           -- neovim `:tmap` mappings for the fzf win
