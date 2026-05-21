@@ -1,5 +1,13 @@
 return {
   {
+    "romus204/tree-sitter-manager.nvim",
+    config = function()
+      require("tree-sitter-manager").setup({
+        auto_install = false,
+      })
+    end,
+  },
+  {
     "JoosepAlviste/nvim-ts-context-commentstring",
     opts = { enable_autocmd = false },
     init = function()
